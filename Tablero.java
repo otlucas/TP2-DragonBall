@@ -14,8 +14,9 @@ public class Tablero {
 	
 	public Tablero(Integer dimension, ArrayList<Personaje> personajes, ArrayList<Consumible> consumibles, ArrayList<Equipo> equipos){
 		
-			/** Crea una instancia de Tablero, primero crea un HashMap con integers como clave y listas (representan las columnas) de casilleros como valor (se rellena de casilleros)
-			 * luego se asigna el resto de los valores pasados por parametro
+			/** Crea una instancia de Tablero, primero crea un HashMap con integers como clave
+			y listas (representan las columnas) de casilleros como valor (se rellena de casilleros)
+			luego se asigna el resto de los valores pasados por parametro a cada atributo
 			 */
 		
 		HashMap<Integer, ArrayList<Casillero>> tablero = new HashMap<Integer, ArrayList<Casillero>>();

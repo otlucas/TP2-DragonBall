@@ -59,7 +59,6 @@ public abstract class Personaje {
 
 	public int getVelocidadDeDesplazamiento() {
 		/** Devuelve la velocidad de desplazamiento del personaje */
-		
 		return this.velocidadDeDesplazamiento;
 	}
 

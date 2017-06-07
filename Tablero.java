@@ -38,8 +38,8 @@ public class Tablero {
 	}
 	
 	public List<Casillero> obtenerCasillerosPosibles(int rango, Casillero casilleroActual){
-		
-		/** Devuelve todos los casilleros que se encuentran dentro del rango recibido por parametro respecto al casillero pasado por parametro */
+		/** Devuelve todos los casilleros que se encuentran dentro del rango
+		recibido por parametro respecto al casillero pasado por parametro */
 		
 		List<Casillero> casillerosPosibles = new ArrayList<Casillero>();
 		int x = casilleroActual.getX();
@@ -69,12 +69,13 @@ public class Tablero {
 				}
 			}
 		}
-		
-		return casillerosPosibles;
-		
+		return casillerosPosibles;	
 	}
 	
 	public void personajeSeMueveHasta(String nombredepersonaje, Casillero casilleroDestino) throws CasilleroOcupado, MovimientoNoValido, NombreDePersonajeNoValido{
+		/** Se chequean las condiciones para que el movimiento sea valido y luego, si es valido,
+		se remueve el personaje de su casillero actual y se lo coloca en el casilleroDestino,
+		si no es valido, se lanza una excepcion */
 		
 		Personaje personaje = null;
 		
@@ -100,7 +101,9 @@ public class Tablero {
 	}
 	
 	public void personajeUsaAtaqueBasicoContra(String nombredelatacante, String nombredelavictima) throws NombreDePersonajeNoValido, AtaqueNoValido{
-		
+		/** Se chequean las condiciones para que el ataque sea válido y luego, si es valido, se le resta
+		la cantidad de puntos de vida correspondiente al personaje que es victima, si no es valido, se lanza una
+		excepcion */
 		Personaje atacante = null;
 		Personaje victima = null;
 		
@@ -127,23 +130,5 @@ public class Tablero {
 			throw new AtaqueNoValido();
 			
 		}
-		
-		
-		
-		
-		
-		
-		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 }

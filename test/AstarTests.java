@@ -58,7 +58,7 @@ public class AstarTests {
     }
 	
 	@Test
-    public void testAStarDimension8y() throws MovimientoNoValido {
+    public void testAStarDimension8yMuchosObstaculos() throws MovimientoNoValido {
 
         Tablero tablero = new Tablero(8, null, null, null);
         
@@ -100,6 +100,77 @@ public class AstarTests {
         caminoCasillerosEsperado.add(tablero.tablero.get(7).get(0));
         
 		ArrayList<Casillero> caminoCasilleros = tablero.AStar(tablero.tablero.get(0).get(6), tablero.tablero.get(7).get(0));
+		assertEquals(true, caminoCasilleros.size() == caminoCasillerosEsperado.size());
+		for(int x = 0; x < caminoCasilleros.size(); x++){
+			assertEquals(true, caminoCasilleros.get(x).getX() == caminoCasillerosEsperado.get(x).getX());
+			assertEquals(true, caminoCasilleros.get(x).getY() == caminoCasillerosEsperado.get(x).getY());
+		}
+        
+        
+    }
+	
+	@Test(expected=MovimientoNoValido.class)
+    public void testAStarDimension3yMovimientoNoValido() throws MovimientoNoValido {
+
+        Tablero tablero = new Tablero(3, null, null, null);
+        
+        tablero.tablero.get(0).get(1).cambiarEstado();
+        tablero.tablero.get(1).get(1).cambiarEstado();
+        tablero.tablero.get(2).get(1).cambiarEstado();
+        ArrayList<Casillero> caminoCasillerosEsperado = new ArrayList<Casillero>();
+        caminoCasillerosEsperado.add(tablero.tablero.get(0).get(2));
+        caminoCasillerosEsperado.add(tablero.tablero.get(1).get(2));
+        caminoCasillerosEsperado.add(tablero.tablero.get(2).get(1));
+        caminoCasillerosEsperado.add(tablero.tablero.get(2).get(0));
+        
+		ArrayList<Casillero> caminoCasilleros = tablero.AStar(tablero.tablero.get(0).get(2), tablero.tablero.get(2).get(0));
+		assertEquals(true, caminoCasilleros.size() == caminoCasillerosEsperado.size());
+		for(int x = 0; x < caminoCasilleros.size(); x++){
+			assertEquals(true, caminoCasilleros.get(x).getX() == caminoCasillerosEsperado.get(x).getX());
+			assertEquals(true, caminoCasilleros.get(x).getY() == caminoCasillerosEsperado.get(x).getY());
+		}
+        
+        
+    }
+	
+	@Test(expected=MovimientoNoValido.class)
+    public void testAStarDimension8yMovimientoNoValido() throws MovimientoNoValido {
+
+        Tablero tablero = new Tablero(8, null, null, null);
+        
+        tablero.tablero.get(0).get(3).cambiarEstado();
+        tablero.tablero.get(1).get(3).cambiarEstado();
+        tablero.tablero.get(2).get(3).cambiarEstado();
+        tablero.tablero.get(3).get(3).cambiarEstado();
+        tablero.tablero.get(4).get(3).cambiarEstado();
+        tablero.tablero.get(5).get(3).cambiarEstado();
+        tablero.tablero.get(6).get(3).cambiarEstado();
+        tablero.tablero.get(7).get(3).cambiarEstado();
+        
+        
+        ArrayList<Casillero> caminoCasillerosEsperado = new ArrayList<Casillero>();
+        
+		ArrayList<Casillero> caminoCasilleros = tablero.AStar(tablero.tablero.get(0).get(6), tablero.tablero.get(7).get(0));
+		assertEquals(true, caminoCasilleros.size() == caminoCasillerosEsperado.size());
+		for(int x = 0; x < caminoCasilleros.size(); x++){
+			assertEquals(true, caminoCasilleros.get(x).getX() == caminoCasillerosEsperado.get(x).getX());
+			assertEquals(true, caminoCasilleros.get(x).getY() == caminoCasillerosEsperado.get(x).getY());
+		}
+        
+        
+    }
+	
+	@Test(expected=MovimientoNoValido.class)
+    public void testAStarDimension4yMovimientoNoValido() throws MovimientoNoValido {
+
+        Tablero tablero = new Tablero(4, null, null, null);
+        
+        tablero.tablero.get(0).get(1).cambiarEstado();
+        tablero.tablero.get(2).get(0).cambiarEstado();
+        
+        ArrayList<Casillero> caminoCasillerosEsperado = new ArrayList<Casillero>();
+        
+		ArrayList<Casillero> caminoCasilleros = tablero.AStar(tablero.tablero.get(0).get(2), tablero.tablero.get(2).get(0));
 		assertEquals(true, caminoCasilleros.size() == caminoCasillerosEsperado.size());
 		for(int x = 0; x < caminoCasilleros.size(); x++){
 			assertEquals(true, caminoCasilleros.get(x).getX() == caminoCasillerosEsperado.get(x).getX());

@@ -1,5 +1,4 @@
 package tablero;
-import java.util.*;
 
 public abstract class Personaje {
 	
@@ -8,7 +7,7 @@ public abstract class Personaje {
 	public Casillero casilleroActual;
 	
 	
-	public void usarPrimeraTransformacion(){
+	public void usarPrimeraTransformacion() throws CondicionesInsuficientes{
 		/** Se chequea si se puede usar la primera transformacion, de ser posible se usa,
 		en el caso contrario se lanza una excepcion */
 		if(!this.puedeEfectuarPrimeraTransformacion())
@@ -16,7 +15,7 @@ public abstract class Personaje {
 		this.efectuarPrimeraTransformacion();
 	}
 	
-	public void usarSegundaTransformacion(){
+	public void usarSegundaTransformacion() throws CondicionesInsuficientes{
 		/** Se chequea si se puede usar la segunda transformacion, de ser posible se usa,
 		en el caso contrario se lanza una excepcion */
 		if(!this.puedeEfectuarSegundaTransformacion())

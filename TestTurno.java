@@ -1,4 +1,4 @@
-package contenido;
+package tablero;
 
 import static org.junit.Assert.*;
 

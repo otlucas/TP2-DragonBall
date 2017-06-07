@@ -1,4 +1,4 @@
-package contenido;
+package Tablero;
 
 import java.util.Random;
 

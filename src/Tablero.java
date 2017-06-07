@@ -251,17 +251,12 @@ public class Tablero {
 		if(personaje == null){
 			throw new NombreDePersonajeNoValido();
 		}
-		if(casilleroDestino.estaOcupado()){
-			throw new CasilleroOcupado();
-		}else{
-			List<Casillero> casillerosPosibles = this.obtenerCasillerosPosibles(personaje.getVelocidadDeDesplazamiento(), personaje.casilleroActual);
-			if(casillerosPosibles.contains(casilleroDestino)){
-				personaje.casilleroActual.cambiarEstado();
-				personaje.casilleroActual = casilleroDestino;
-			}else{
-				throw new MovimientoNoValido();
-			}
-		}	
+		ArrayList<Casillero> caminoMinimo = this.AStar(personaje.casilleroActual, casilleroDestino);
+		if(caminoMinimo.size() - 1 <= personaje.getVelocidadDeDesplazamiento()){
+			personaje.casilleroActual.cambiarEstado();
+			personaje.casilleroActual = casilleroDestino;
+			personaje.casilleroActual.cambiarEstado();
+		}
 	}
 	
 	public void personajeUsaAtaqueBasicoContra(String nombredelatacante, String nombredelavictima) throws NombreDePersonajeNoValido, AtaqueNoValido{

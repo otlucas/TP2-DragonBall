@@ -4,8 +4,8 @@ public class Nodo {
 	
 	Nodo Padre;
 	Casillero actual;
-	double valorG;
-	double valorH;
+	double valorG; //ValorG es el costo que tiene llegar a este nodo desde el nodo partida
+	double valorH; //ValorH es la distancia que tiene este nodo al nodo destino (el modulo de la resta de sus coordenadas)
 	
 	public Nodo(Nodo padre, Casillero actual, double valorG, double valorH){
 		this.Padre = padre;

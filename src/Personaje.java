@@ -10,16 +10,18 @@ public abstract class Personaje {
 	public void usarPrimeraTransformacion() throws CondicionesInsuficientes{
 		/** Se chequea si se puede usar la primera transformacion, de ser posible se usa,
 		en el caso contrario se lanza una excepcion */
-		if(!this.puedeEfectuarPrimeraTransformacion())
+		if(!this.puedeEfectuarPrimeraTransformacion()) {
 			throw new CondicionesInsuficientes();
+		}
 		this.efectuarPrimeraTransformacion();
 	}
 	
 	public void usarSegundaTransformacion() throws CondicionesInsuficientes{
 		/** Se chequea si se puede usar la segunda transformacion, de ser posible se usa,
 		en el caso contrario se lanza una excepcion */
-		if(!this.puedeEfectuarSegundaTransformacion())
+		if(!this.puedeEfectuarSegundaTransformacion()){
 			throw new CondicionesInsuficientes();
+		}
 		this.efectuarSegundaTransformacion();
 	}
 	
@@ -45,9 +47,9 @@ public abstract class Personaje {
 	
 	public void ganarPuntosDeVida(int cantidad){
 		/** Gana la cantidad de puntos de vida recibida por parametro */
-		if (puntosDeVida + cantidad > puntosDeVidaMaximos)
+		if (puntosDeVida + cantidad >= puntosDeVidaMaximos){
 			puntosDeVida = puntosDeVidaMaximos;
-		else
+		}else{
 			puntosDeVida = puntosDeVida + cantidad;
 	}
 	

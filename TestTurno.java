@@ -14,6 +14,7 @@ public class TestTurno {
 		fail("Not yet implemented");
 	}
 	
+	@Test
 	public void testDevolverEquipo() {
 		
 		int equipo = testTurno.devolverEquipo();
@@ -21,6 +22,7 @@ public class TestTurno {
 		Assert.assertEquals(0, equipo);
 	}
 	
+	@Test
 	public void testDevolverEquipoInicial() {
 		
 		testTurno.turnoInicial();
@@ -32,6 +34,7 @@ public class TestTurno {
 		Assert.assertTrue(equipo == equipoInicial);
 	}
 	
+	@Test
 	public void testDevolverNumeroDeTurno() {
 		
 		testTurno.turnoInicial();
@@ -41,6 +44,7 @@ public class TestTurno {
 		Assert.assertTrue(1 == numeroDeTurno);
 	}
 	
+	@Test
 	public void testFinalizarTurno() {
 		
 		testTurno.turnoInicial();
@@ -58,6 +62,7 @@ public class TestTurno {
 		Assert.assertFalse(equipo != equipoInicial);
 	}
 	
+	@Test
 	public void testCambioDeEquipoSinCambioDeTurno() {
 		
 		testTurno.turnoInicial();
@@ -79,6 +84,7 @@ public class TestTurno {
 		Assert.assertTrue(((equipo != equipoInicial) && (1 == numeroDeTurno)));
 	}
 	
+	@Test
 	public void testFinalizarTurnoVarios() {
 		
 		testTurno.turnoInicial();

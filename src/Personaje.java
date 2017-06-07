@@ -72,4 +72,9 @@ public abstract class Personaje {
 		/** Devuelve el poder de pelea del personaje */
 		return this.poderDePelea;
 	}
+	
+	public void ganarKi() {
+		/** Al comienzo de cada turno, todos los personajes ganan 5 puntos de ki */
+		this.ki = this.ki + 5;
+	}
 }

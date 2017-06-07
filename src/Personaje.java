@@ -51,6 +51,7 @@ public abstract class Personaje {
 			puntosDeVida = puntosDeVidaMaximos;
 		}else{
 			puntosDeVida = puntosDeVida + cantidad;
+		}
 	}
 	
 	

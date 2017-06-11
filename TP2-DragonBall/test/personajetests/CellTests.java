@@ -97,7 +97,7 @@ public class CellTests {
 		for (int i = 0; i<20; i++)
 			testCell.ganarKi();
 		
-		for (int i = 0; i<4; i++)
+		for (int i = 0; i<5; i++)
 			testCell.ejecutarAtaqueEspecial(0);
 		
 		assertTrue(testCell.puedeEfectuarPrimeraTransformacion());
@@ -237,7 +237,7 @@ public class CellTests {
 		for (int i = 0; i<25; i++)
 			testCell.ganarKi();
 		
-		for (int i = 0; i<4; i++)
+		for (int i = 0; i<5; i++)
 			testCell.ejecutarAtaqueEspecial(0);
 		
 		testCell.usarPrimeraTransformacion();
@@ -250,6 +250,8 @@ public class CellTests {
 		testCell = new Cell();
 		for (int i = 0; i<25; i++)
 			testCell.ganarKi();
+		for (int i = 0; i<9; i++)
+			testCell.ejecutarAtaqueEspecial(0);
 		testCell.usarPrimeraTransformacion();
 		testCell.usarSegundaTransformacion();
 		

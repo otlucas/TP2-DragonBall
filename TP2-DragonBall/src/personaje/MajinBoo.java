@@ -4,20 +4,29 @@ public class MajinBoo extends Personaje {
 	
 	public MajinBoo(){
 		this.nombre = "MajinBoo";
-		this.modo = "Normal";
+		this.modo = new Normal();
 		this.puntosDeVidaMaximos = 300;
 		this.puntosDeVida = 300;
-		this.poderDePelea = 30;
-		this.distanciaDeAtaque = 2;
-		this.velocidadDeDesplazamiento = 2;
 		this.ki = 0;
+		
+		this.poderDePeleaN = 30;
+		this.distanciaDeAtaqueN = 2;
+		this.velocidadDeDesplazamientoN = 2;
+		
+		this.poderDePeleaPT = 50;
+		this.distanciaDeAtaquePT = 2;
+		this.velocidadDeDesplazamientoPT = 3;
+		
+		this.poderDePeleaST = 60;
+		this.distanciaDeAtaqueST = 3;
+		this.velocidadDeDesplazamientoST = 4;
 	}
 	
-	public int ejecutarAtaqueEspecial(int dano){
-		dano = 0;
+	public int ejecutarAtaqueEspecial(int danio){
+		danio = 0;
 		ki = ki-30;
 		/*INUTILIZAR ENEMIGO*/
-		return dano;
+		return danio;
 	}
 	
 	public boolean puedeEfectuarAtaqueEspecial(){
@@ -25,25 +34,20 @@ public class MajinBoo extends Personaje {
 	}
 	
 	public boolean puedeEfectuarPrimeraTransformacion(){
-		return ((ki >= 20) && (modo == "Normal"));
+		return ((ki >= 20) && (modo.getClass() == Normal.class));
 	}
 	
 	public boolean puedeEfectuarSegundaTransformacion(){
-		return ((ki >= 50) && (modo == "Boo Malo"));
+		return ((ki >= 50) && (modo.getClass() == PrimeraTransformacion.class));
 	}
 	
 	public void efectuarPrimeraTransformacion(){
-		modo = "Boo Malo";
-		poderDePelea = 50;
-		velocidadDeDesplazamiento = 3;
+		modo = new PrimeraTransformacion();
 		ki = ki-20;
 	}
 	
 	public void efectuarSegundaTransformacion(){
-		modo = "Boo Original";
-		poderDePelea = 60;
-		distanciaDeAtaque = 3;
-		velocidadDeDesplazamiento = 4;
+		modo = new SegundaTransformacion();
 		ki = ki-50;
 	}
 }

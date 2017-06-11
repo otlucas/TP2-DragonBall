@@ -4,19 +4,28 @@ public class Goku extends Personaje {
 	
 	public Goku(){
 		this.nombre = "Goku";
-		this.modo = "Normal";
+		this.modo = new Normal();
 		this.puntosDeVidaMaximos = 500;
 		this.puntosDeVida = 500;
-		this.poderDePelea = 20;
-		this.distanciaDeAtaque = 2;
-		this.velocidadDeDesplazamiento = 2;
 		this.ki = 0;
+		
+		this.poderDePeleaN = 20;
+		this.distanciaDeAtaqueN = 2;
+		this.velocidadDeDesplazamientoN = 2;
+		
+		this.poderDePeleaPT = 40;
+		this.distanciaDeAtaquePT = 4;
+		this.velocidadDeDesplazamientoPT = 3;
+
+		this.poderDePeleaST = 60;
+		this.distanciaDeAtaqueST = 4;
+		this.velocidadDeDesplazamientoST = 5;
 	}
 	
-	public int ejecutarAtaqueEspecial(int dano){
-		dano = dano + (50/100)*dano;
+	public int ejecutarAtaqueEspecial(int danio){
+		danio = danio + (50/100)*danio;
 		ki = ki-20;
-		return dano;
+		return danio;
 	}
 	
 	public boolean puedeEfectuarAtaqueEspecial(){
@@ -24,25 +33,20 @@ public class Goku extends Personaje {
 	}
 	
 	public boolean puedeEfectuarPrimeraTransformacion(){
-		return ((ki >= 20) && (modo == "Normal"));
+		return ((ki >= 20) && (modo.getClass() == Normal.class));
 	}
 	
 	public boolean puedeEfectuarSegundaTransformacion(){
-		return ((ki >= 50) && (modo == "Kaio-Ken"));
+		return ((ki >= 50) && (modo.getClass() == PrimeraTransformacion.class));
 	}
 	
 	public void efectuarPrimeraTransformacion(){
-		modo = "Kaio-Ken";
-		poderDePelea = 40;
-		distanciaDeAtaque = 4;
-		velocidadDeDesplazamiento = 3;
+		modo = new PrimeraTransformacion();
 		ki = ki-20;
 	}
 	
 	public void efectuarSegundaTransformacion(){
-		modo = "Super Sayajin";
-		poderDePelea = 60;
-		velocidadDeDesplazamiento = 5;
+		modo = new SegundaTransformacion();
 		ki = ki-50;
 	}
 

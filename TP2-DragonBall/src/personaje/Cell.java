@@ -6,20 +6,29 @@ public class Cell extends Personaje {
 	
 	public Cell(){
 		this.nombre = "Cell";
-		this.modo = "Normal";
+		this.modo = new Normal();
 		this.puntosDeVidaMaximos = 500;
 		this.puntosDeVida = 500;
-		this.poderDePelea = 20;
-		this.distanciaDeAtaque = 3;
-		this.velocidadDeDesplazamiento = 2;
 		this.ki = 0;
+		
+		this.poderDePeleaN = 20;
+		this.distanciaDeAtaqueN = 3;
+		this.velocidadDeDesplazamientoN = 2;
+		
+		this.poderDePeleaPT = 40;
+		this.distanciaDeAtaquePT = 4;
+		this.velocidadDeDesplazamientoPT = 3;
+		
+		this.poderDePeleaST = 80;
+		this.distanciaDeAtaqueST = 4;
+		this.velocidadDeDesplazamientoST = 4;
 	}
 	
-	public int ejecutarAtaqueEspecial(int dano){
-		this.ganarPuntosDeVida(dano);;
+	public int ejecutarAtaqueEspecial(int danio){
+		this.ganarPuntosDeVida(danio);;
 		ki = ki-5;
 		cantidadDeVecesQueAbsorbioVida++;
-		return dano;
+		return danio;
 	}
 	
 	public boolean puedeEfectuarAtaqueEspecial(){
@@ -27,23 +36,18 @@ public class Cell extends Personaje {
 	}
 	
 	public boolean puedeEfectuarPrimeraTransformacion(){
-		return ((cantidadDeVecesQueAbsorbioVida > 4) && (modo == "Normal"));
+		return ((cantidadDeVecesQueAbsorbioVida >= 4) && (modo.getClass() == Normal.class));
 	}
 	
 	public boolean puedeEfectuarSegundaTransformacion(){
-		return ((cantidadDeVecesQueAbsorbioVida > 8) && (modo == "Semi-perfecto"));
+		return ((cantidadDeVecesQueAbsorbioVida >= 8) && (modo.getClass() == PrimeraTransformacion.class));
 	}
 	
 	public void efectuarPrimeraTransformacion(){
-		modo = "Semi-perfecto";
-		poderDePelea = 40;
-		distanciaDeAtaque = 4;
-		velocidadDeDesplazamiento = 3;
+		modo = new PrimeraTransformacion();
 	}
 	
 	public void efectuarSegundaTransformacion(){
-		modo = "Perfecto";
-		poderDePelea = 80;
-		velocidadDeDesplazamiento = 4;
+		modo = new SegundaTransformacion();
 	}
 }

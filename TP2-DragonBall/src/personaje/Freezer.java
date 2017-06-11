@@ -4,19 +4,28 @@ public class Freezer extends Personaje {
 	
 	public Freezer(){
 		this.nombre = "Freezer";
-		this.modo = "Normal";
+		this.modo = new Normal();
 		this.puntosDeVidaMaximos = 400;
 		this.puntosDeVida = 400;
-		this.poderDePelea = 20;
-		this.distanciaDeAtaque = 2;
-		this.velocidadDeDesplazamiento = 4;
 		this.ki = 0;
+		
+		this.poderDePeleaN = 20;
+		this.distanciaDeAtaqueN = 2;
+		this.velocidadDeDesplazamientoN = 4;
+		
+		this.poderDePeleaPT = 40;
+		this.distanciaDeAtaquePT = 3;
+		this.velocidadDeDesplazamientoPT = 4;
+		
+		this.poderDePeleaST = 50;
+		this.distanciaDeAtaqueST = 3;
+		this.velocidadDeDesplazamientoST = 6;
 	}
 	
-	public int ejecutarAtaqueEspecial(int dano){
-		dano = dano + (50/100)*dano;
+	public int ejecutarAtaqueEspecial(int danio){
+		danio = danio + (50/100)*danio;
 		ki = ki-20;
-		return dano;
+		return danio;
 	}
 	
 	public boolean puedeEfectuarAtaqueEspecial(){
@@ -24,24 +33,20 @@ public class Freezer extends Personaje {
 	}
 	
 	public boolean puedeEfectuarPrimeraTransformacion(){
-		return ((ki >= 20) && (modo == "Normal"));
+		return ((ki >= 20) && (modo.getClass() == Normal.class));
 	}
 	
 	public boolean puedeEfectuarSegundaTransformacion(){
-		return ((ki >= 50) && (modo == "Segunda forma"));
+		return ((ki >= 50) && (modo.getClass() == PrimeraTransformacion.class));
 	}
 	
 	public void efectuarPrimeraTransformacion(){
-		modo = "Segunda forma";
-		poderDePelea = 40;
-		distanciaDeAtaque = 3;
+		modo = new PrimeraTransformacion();
 		ki = ki-20;
 	}
 	
 	public void efectuarSegundaTransformacion(){
-		modo = "Definitivo";
-		poderDePelea = 50;
-		velocidadDeDesplazamiento = 6;
+		modo = new SegundaTransformacion();
 		ki = ki-50;
 	}
 }

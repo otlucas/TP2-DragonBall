@@ -100,4 +100,8 @@ public abstract class Personaje implements Posicionable {
 	public boolean ocupaEspacio() {
 		return true;
 	}
+	public void setEquipo(Equipo equipo) {
+		// Se le asigna un equipo al personaje
+		this.equipo = equipo;
+	}
 }

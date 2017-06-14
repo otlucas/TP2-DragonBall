@@ -49,5 +49,17 @@ public class Goku extends Personaje {
 		modo = new SegundaTransformacion();
 		ki = ki-50;
 	}
-
+	
+	public double porcentajeDanio(){
+		return this.puntosDeVida < (0.3 * this.puntosDeVidaMaximos) ? 1.2 : 1;
+	}
+	
+	@Override
+	public void atacarA(Personaje victima, boolean especial){
+		double multiplicador =  victima.getPoderDePelea()>getPoderDePelea() ? 0.8 : 1;
+		int danio = getPoderDePelea();
+		if (especial)
+			danio = ejecutarAtaqueEspecial(danio);
+		victima.perderPuntosDeVida((int)(danio*multiplicador*this.porcentajeDanio()));
+	}
 }

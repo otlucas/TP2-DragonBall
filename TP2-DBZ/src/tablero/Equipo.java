@@ -20,6 +20,7 @@ public class Equipo {
 	
 	public void agregarPersonaje(Personaje personaje){
 		integrantes.put(personaje.nombre, personaje);
+		personaje.setEquipo(this);
 	}
 	
 	public void incrementarEsferasDelDragon(){

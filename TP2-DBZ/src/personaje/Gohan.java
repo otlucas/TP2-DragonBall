@@ -39,7 +39,11 @@ public class Gohan extends Personaje {
 	public boolean puedeEfectuarSegundaTransformacion(){
 		/*int puntosDeVidaDeGoku = Goku.obtenerPuntosDeVida();
 		int puntosDeVidaDePiccolo = Piccolo.obtenerPuntosDeVida();*/
-		return ((ki >= 30) && (modo.getClass() == PrimeraTransformacion.class)) /*|| ((puntosDeVidaDeGoku < (30/100)*puntosDeVidaDeGoku) && (puntosDeVidaDePiccolo < (30/100)*puntosDeVidaDePiccolo))))*/;
+		int pDeVidaMaximosDeGoku = this.getEquipo().getIntegrantes().get("Goku").puntosDeVidaMaximos;
+		int pDeVidaActualDeGoku = this.getEquipo().getIntegrantes().get("Goku").obtenerPuntosDeVida();
+		int pDeVidaMaximosDePiccolo = this.getEquipo().getIntegrantes().get("Piccolo").puntosDeVidaMaximos;
+		int pDeVidaActualDePiccolo = this.getEquipo().getIntegrantes().get("Piccolo").obtenerPuntosDeVida();
+		return ((ki >= 30) && (modo.getClass() == PrimeraTransformacion.class)) && ((pDeVidaActualDeGoku < (30/100)*pDeVidaMaximosDeGoku) && (pDeVidaActualDePiccolo < (30/100) * pDeVidaMaximosDePiccolo));
 	}
 	
 	public void efectuarPrimeraTransformacion(){

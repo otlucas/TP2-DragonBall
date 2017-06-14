@@ -38,7 +38,9 @@ public class Piccolo extends Personaje {
 	
 	public boolean puedeEfectuarSegundaTransformacion(){
 		/*int puntosDeVidaDeGohan = Gohan.obtenerPuntosDeVida();*/
-		return /*((puntosDeVidaDeGohan < (20/100)*puntosDeVidaDeGohan) &&*/ (modo.getClass() == PrimeraTransformacion.class);
+		int puntosDeVidaMaximosDeGohan = this.getEquipo().getIntegrantes().get("Gohan").puntosDeVidaMaximos;
+		int puntosDeVidaActualDeGohan = this.getEquipo().getIntegrantes().get("Gohan").obtenerPuntosDeVida();
+		return ((puntosDeVidaActualDeGohan < (20/100)*puntosDeVidaMaximosDeGohan) && (modo.getClass() == PrimeraTransformacion.class));
 	}
 	
 	public void efectuarPrimeraTransformacion(){

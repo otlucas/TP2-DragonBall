@@ -1,18 +1,17 @@
 package tablero;
 
 import personaje.Personaje;
-import java.util.List;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Equipo {
 	
 	private String nombre;
 	private int cantidadDeEsferasDelDragon = 0;
-	private List<Personaje> integrantes;
+	private HashMap<String, Personaje> integrantes;
 	
 	public Equipo(String nombre){
 		this.nombre = nombre;
-		this.integrantes = new ArrayList<Personaje>();
+		this.integrantes = new HashMap<String, Personaje>();
 	}
 	
 	public String getNombre(){
@@ -20,7 +19,7 @@ public class Equipo {
 	}
 	
 	public void agregarPersonaje(Personaje personaje){
-		integrantes.add(personaje);
+		integrantes.put(personaje.nombre, personaje);
 	}
 	
 	public void incrementarEsferasDelDragon(){
@@ -31,12 +30,12 @@ public class Equipo {
 		return cantidadDeEsferasDelDragon;
 	}
 
-	public List<Personaje> getIntegrantes() {
+	public HashMap<String, Personaje> getIntegrantes() {
 		return integrantes;
 	}
 
 	public boolean perdio(){
-		for(Personaje p: integrantes){
+		for(Personaje p: integrantes.values()){
 			if(!p.estaMuerto()) return false;
 		}
 		return true;

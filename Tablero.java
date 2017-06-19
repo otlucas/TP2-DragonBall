@@ -46,8 +46,4 @@ public class Tablero {
 			throw new MovimientoNoValido();
 		}
 	}
-	
-	public Casillero getCasillero(int x, int y){
-		return tablero[x][y];
-	}
 }

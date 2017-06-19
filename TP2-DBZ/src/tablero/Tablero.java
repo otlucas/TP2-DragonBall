@@ -18,7 +18,8 @@ public class Tablero {
 		}
 	}
 
-	public boolean posicionar(Posicionable posicionable, Casillero casillero){
+	public boolean posicionar(Posicionable posicionable, int x, int y){
+		Casillero casillero = tablero[x][y];
 		if(!casillero.estaOcupado()){
 			casillero.setPosicionable(posicionable);
 			return true;
@@ -44,9 +45,5 @@ public class Tablero {
 		}else {
 			throw new MovimientoNoValido();
 		}
-	}
-
-	public Casillero[][] getTablero() {
-		return tablero;
 	}
 }

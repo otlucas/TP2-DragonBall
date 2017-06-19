@@ -5,208 +5,192 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import posicionable.CondicionesInsuficientes;
+import tablero.Equipo;
+import personaje.Gohan;
 import personaje.Piccolo;
 
 public class PiccoloTests {
 	
+	private Piccolo testPiccolo = new Piccolo();
+	private Gohan gohan = new Gohan();
+	
+	private Equipo e = new Equipo("Guerreros Z");
+	
 	@Test
 	public void test01ObtenerPoderDePelea(){
-		Piccolo picolo = new Piccolo();
 		
-		assertTrue(picolo.getPoderDePelea() == 20);
+		assertTrue(testPiccolo.getPoderDePelea() == 20);
 	}
 	
 	@Test
 	public void test02ObtenerPuntosDeVida(){
-		Piccolo picolo = new Piccolo();
-		
-		assertTrue(picolo.obtenerPuntosDeVida() == 500);
+
+		assertTrue(testPiccolo.getPuntosDeVida() == 500);
 	}
 	
 	@Test
 	public void test03ObtenerDistanciaDeAtaque(){
-		Piccolo picolo = new Piccolo();
-		
-		assertTrue(picolo.getdistanciaDeAtaque() == 2);
+
+		assertTrue(testPiccolo.getdistanciaDeAtaque() == 2);
 	}
 	
 	@Test
 	public void test04ObtenerVelocidadDeDesplazamiento(){
-		Piccolo picolo = new Piccolo();
-		
-		assertTrue(picolo.getVelocidadDeDesplazamiento() == 2);
+
+		assertTrue(testPiccolo.getVelocidadDeDesplazamiento() == 2);
 	}
 	
 	@Test
 	public void test05PerderPuntosDeVida(){
-		Piccolo picolo = new Piccolo();
-		picolo.perderPuntosDeVida(140);
+		testPiccolo.perderPuntosDeVida(140);
 		
-		assertTrue(picolo.obtenerPuntosDeVida() == 360);
+		assertTrue(testPiccolo.getPuntosDeVida() == 360);
 	}
 	
 	@Test
 	public void test06GanarPuntosDeVida(){
-		Piccolo picolo = new Piccolo();
-		picolo.perderPuntosDeVida(140);
-		picolo.ganarPuntosDeVida(50);
+		testPiccolo.perderPuntosDeVida(140);
+		testPiccolo.ganarPuntosDeVida(50);
 		
-		assertTrue(picolo.obtenerPuntosDeVida() == 410);		
+		assertTrue(testPiccolo.getPuntosDeVida() == 410);		
 	}
 	
 	@Test
 	public void test07PuedeEfectuarPrimeraTransformacionInicialmenteDaFalse(){
-		Piccolo picolo = new Piccolo();
-		
-		assertFalse(picolo.puedeEfectuarPrimeraTransformacion());
+
+		assertFalse(testPiccolo.puedeTransformarse());
 	}
 	
 	@Test
 	public void test08PuedeEfectuarAtaqueEspecialInicialmenteDaFalse(){
-		Piccolo picolo = new Piccolo();
 		
-		assertFalse(picolo.puedeEfectuarAtaqueEspecial());
+		assertFalse(testPiccolo.puedeEfectuarAtaqueEspecial());
 	}
 	
 	@Test
-	public void test09PuedeEfectuarSegundaTransformacionInicialmenteDaFalse(){
-		Piccolo picolo = new Piccolo();
-		
-		assertFalse(picolo.puedeEfectuarSegundaTransformacion());
-	}
-	
-	@Test
-	public void test10LuegoDeVariosTurnosEfectuarPrimeraTrasformacionEsTrue(){
-		Piccolo picolo = new Piccolo();
+	public void test09LuegoDeVariosTurnosEfectuarPrimeraTrasformacionEsTrue(){
 		for (int i = 0; i<5; i++)
-			picolo.ganarKi();
+			testPiccolo.ganarKi();
 		
-		assertTrue(picolo.puedeEfectuarPrimeraTransformacion());
+		assertTrue(testPiccolo.puedeTransformarse());
 	}
 	
 	@Test
-	public void test11SinEfectuarPrimeraTransformacionNoPuedeEfectuarSegunda(){
-		Piccolo picolo = new Piccolo();
-		for (int i = 0; i<10; i++)
-			picolo.ganarKi();
-		
-		assertFalse(picolo.puedeEfectuarSegundaTransformacion());
-	}
-	
-	@Test
-	public void test12LuegoDeVariosTurnosPuedeEfectuarAtaqueEspecialEsTrue(){
-		Piccolo picolo = new Piccolo();
+	public void test10LuegoDeVariosTurnosPuedeEfectuarAtaqueEspecialEsTrue(){
 		for (int i = 0; i<8; i++)
-			picolo.ganarKi();
+			testPiccolo.ganarKi();
 		
-		assertTrue(picolo.puedeEfectuarAtaqueEspecial());
+		assertTrue(testPiccolo.puedeEfectuarAtaqueEspecial());
 	}
 	
 	@Test
-	public void test13LuegoDeEfectuarPrimeraPuedeEfectuarSegundaTransformacionEsTrue(){
-		Piccolo picolo = new Piccolo();
+	public void test11LuegoDeEfectuarPrimeraPuedeEfectuarSegundaTransformacionEsTrue() throws personaje.CondicionesInsuficientes{
+		e.agregarPersonaje(gohan);
+		testPiccolo.setEquipo(e);
+		gohan.perderPuntosDeVida(250);
 		for (int i = 0; i<20; i++)
-			picolo.ganarKi();
-		picolo.efectuarPrimeraTransformacion();
+			testPiccolo.ganarKi();
+		testPiccolo.transformarse();
 		
-		assertTrue(picolo.puedeEfectuarSegundaTransformacion());
+		assertTrue(testPiccolo.puedeTransformarse());
 	}
 	
 	@Test
-	public void test14EfectuarPrimeraTransformacionCambioPoderDePelea(){
-		Piccolo picolo = new Piccolo();
+	public void test12EfectuarPrimeraTransformacionCambioPoderDePelea() throws personaje.CondicionesInsuficientes{
 		for (int i = 0; i<8; i++)
-			picolo.ganarKi();
-		picolo.efectuarPrimeraTransformacion();
+			testPiccolo.ganarKi();
+		testPiccolo.transformarse();
 		
-		assertTrue(picolo.getPoderDePelea() == 40);
+		assertTrue(testPiccolo.getPoderDePelea() == 40);
 	}
 	
 	@Test
-	public void test15EfectuarPrimeraTransformacionCambioVelocidadDeDesplazamiento(){
-		Piccolo picolo = new Piccolo();
+	public void test13EfectuarPrimeraTransformacionCambioVelocidadDeDesplazamiento() throws personaje.CondicionesInsuficientes{
 		for (int i = 0; i<8; i++)
-			picolo.ganarKi();
-		picolo.efectuarPrimeraTransformacion();
+			testPiccolo.ganarKi();
+		testPiccolo.transformarse();
 		
-		assertTrue(picolo.getVelocidadDeDesplazamiento() == 3);
+		assertTrue(testPiccolo.getVelocidadDeDesplazamiento() == 3);
 	}
 	
 	@Test
-	public void test16EfectuarPrimeraTransformacionCambioDistanciaDeAtaque(){
-		Piccolo picolo = new Piccolo();
+	public void test14EfectuarPrimeraTransformacionCambioDistanciaDeAtaque() throws personaje.CondicionesInsuficientes{
 		for (int i = 0; i<8; i++)
-			picolo.ganarKi();
-		picolo.efectuarPrimeraTransformacion();
+			testPiccolo.ganarKi();
+		testPiccolo.transformarse();
 		
-		assertTrue(picolo.getdistanciaDeAtaque() == 4);
+		assertTrue(testPiccolo.getdistanciaDeAtaque() == 4);
 	}
 	
 	@Test
-	public void test17EfectuarSegundaTransformacionCambioPoderDePelea(){
-		Piccolo picolo = new Piccolo();
+	public void test15EfectuarSegundaTransformacionCambioPoderDePelea() throws personaje.CondicionesInsuficientes{
+		e.agregarPersonaje(gohan);
+		testPiccolo.setEquipo(e);
+		gohan.perderPuntosDeVida(250);
 		for (int i = 0; i<25; i++)
-			picolo.ganarKi();
-		picolo.efectuarPrimeraTransformacion();
-		picolo.efectuarSegundaTransformacion();
+			testPiccolo.ganarKi();
+		testPiccolo.transformarse();
+		testPiccolo.transformarse();
 		
-		assertTrue(picolo.getPoderDePelea() == 60);
+		assertTrue(testPiccolo.getPoderDePelea() == 60);
 	}
 	
 	@Test
-	public void test18EfectuarSegundaTransformacionCambioVelocidadDeDesplazamiento(){
-		Piccolo picolo = new Piccolo();
+	public void test16EfectuarSegundaTransformacionCambioVelocidadDeDesplazamiento() throws personaje.CondicionesInsuficientes{
+		e.agregarPersonaje(gohan);
+		testPiccolo.setEquipo(e);
+		gohan.perderPuntosDeVida(250);
 		for (int i = 0; i<25; i++)
-			picolo.ganarKi();
-		picolo.efectuarPrimeraTransformacion();
-		picolo.efectuarSegundaTransformacion();
+			testPiccolo.ganarKi();
+		testPiccolo.transformarse();
+		testPiccolo.transformarse();
 		
-		assertTrue(picolo.getVelocidadDeDesplazamiento() == 4);
+		assertTrue(testPiccolo.getVelocidadDeDesplazamiento() == 4);
 	}
 	
 	@Test
-	public void test19EfectuarSegundaTransformacionCambioDistanciaDeAtaque(){
-		Piccolo picolo = new Piccolo();
+	public void test17EfectuarSegundaTransformacionCambioDistanciaDeAtaque() throws personaje.CondicionesInsuficientes{
+		e.agregarPersonaje(gohan);
+		testPiccolo.setEquipo(e);
+		gohan.perderPuntosDeVida(250);
 		for (int i = 0; i<25; i++)
-			picolo.ganarKi();
-		picolo.efectuarPrimeraTransformacion();
-		picolo.efectuarSegundaTransformacion();
+			testPiccolo.ganarKi();
+		testPiccolo.transformarse();
+		testPiccolo.transformarse();
 		
-		assertTrue(picolo.getdistanciaDeAtaque() == 6);
+		assertTrue(testPiccolo.getdistanciaDeAtaque() == 6);
 	}
 	
-	@Test (expected = CondicionesInsuficientes.class)
-	public void test20UsarPrimeraTransformacionInicialmenteLanzaCondicionesInsuficientes() throws CondicionesInsuficientes{
-		Piccolo picolo = new Piccolo();
-		picolo.efectuarPrimeraTransformacion();
+	@Test (expected = personaje.CondicionesInsuficientes.class)
+	public void test18UsarPrimeraTransformacionInicialmenteLanzaCondicionesInsuficientes() throws personaje.CondicionesInsuficientes{
+		testPiccolo.transformarse();
 	}
 	
-	@Test (expected = CondicionesInsuficientes.class)
-	public void test21UsarSegundaTransformacionInicialmenteLanzaCondicionesInsuficientes() throws CondicionesInsuficientes{
-		Piccolo picolo = new Piccolo();
-		picolo.efectuarSegundaTransformacion();
+	@Test (expected = personaje.CondicionesInsuficientes.class)
+	public void test19UsarSegundaTransformacionInicialmenteLanzaCondicionesInsuficientes() throws personaje.CondicionesInsuficientes{
+		testPiccolo.transformarse();
 	}
 	
 	@Test 
-	public void test22SePuedeUsarPrimeraTransformacionLuegoDeTurnos() throws CondicionesInsuficientes{
-		Piccolo picolo = new Piccolo();
+	public void test20SePuedeUsarPrimeraTransformacionLuegoDeTurnos() throws personaje.CondicionesInsuficientes{
 		for (int i = 0; i<25; i++)
-			picolo.ganarKi();
-		picolo.efectuarPrimeraTransformacion();
+			testPiccolo.ganarKi();
+		testPiccolo.transformarse();
 		
-		assertTrue((picolo.getPoderDePelea() == 40) && (picolo.getVelocidadDeDesplazamiento() == 3) && (picolo.getdistanciaDeAtaque() == 4));
+		assertTrue((testPiccolo.getPoderDePelea() == 40) && (testPiccolo.getVelocidadDeDesplazamiento() == 3) && (testPiccolo.getdistanciaDeAtaque() == 4));
 	}
 	
 	@Test 
-	public void test23SePuedeUsarSegundaTransformacionLuegoDeTurnos() throws CondicionesInsuficientes{
-		Piccolo picolo = new Piccolo();
+	public void test21SePuedeUsarSegundaTransformacionLuegoDeTurnos() throws personaje.CondicionesInsuficientes{
+		e.agregarPersonaje(gohan);
+		testPiccolo.setEquipo(e);
+		gohan.perderPuntosDeVida(250);
 		for (int i = 0; i<25; i++)
-			picolo.ganarKi();
-		picolo.efectuarPrimeraTransformacion();
-		picolo.efectuarSegundaTransformacion();
+			testPiccolo.ganarKi();
+		testPiccolo.transformarse();
+		testPiccolo.transformarse();
 		
-		assertTrue((picolo.getPoderDePelea() == 60) && (picolo.getVelocidadDeDesplazamiento() == 4) && (picolo.getdistanciaDeAtaque() == 6));
+		assertTrue((testPiccolo.getPoderDePelea() == 60) && (testPiccolo.getVelocidadDeDesplazamiento() == 4) && (testPiccolo.getdistanciaDeAtaque() == 6));
 	}
 
 

@@ -3,12 +3,15 @@ package personaje;
 import personaje.estado.*;
 import posicionable.Posicionable;
 import tablero.Equipo;
+import consumible.Efecto;
+import java.util.HashMap;
 
 public abstract class Personaje implements Posicionable {
 	
 	public String nombre;
 	protected int puntosDeVidaMaximos, puntosDeVida, ki;
 	protected Estado modo;
+	protected HashMap<Integer, Efecto> efectos = new HashMap<Integer, Efecto>(); 
 	private Equipo equipo;
 	
 	public abstract boolean puedeEfectuarAtaqueEspecial(); 
@@ -31,7 +34,11 @@ public abstract class Personaje implements Posicionable {
 	
 	/*Devuelve el poder de pelea del personaje.*/
 	public int getPoderDePelea() {
-		return modo.getPoderDePelea();
+		double efecto = 1;
+		if (efectos.containsKey(3)) {
+			efecto = 1.25;
+		}
+		return (modo.getPoderDePelea() * efecto);
 	}
 	
 	/*Devuelve la distancia de ataque del personaje.*/
@@ -41,7 +48,11 @@ public abstract class Personaje implements Posicionable {
 	
 	/*Devuelve la velocidad de desplazamiento del personaje.*/
 	public int getVelocidadDeDesplazamiento() {
-		return modo.getVelocidadDeDesplazamiento();
+		int efecto = 1;
+		if (efectos.containsKey(2)) {
+			efecto = 2;
+		}
+		return (modo.getVelocidadDeDesplazamiento() * efecto);
 	}
 	
 	/*Se le asigna un equipo al personaje*/
@@ -74,7 +85,11 @@ public abstract class Personaje implements Posicionable {
 	
 	/*Al comienzo de cada turno, todos los personajes ganan 5 puntos de ki.*/
 	public void ganarKi() {
-		ki = ki + 5;
+		int efecto = 1;
+		if (efectos.containsKey(4)) {
+			efecto = 0;
+		}
+		ki = ki + (5 * efecto);
 	}
 	
 	public void atacarA(Personaje victima, boolean especial) {
@@ -97,6 +112,38 @@ public abstract class Personaje implements Posicionable {
 		} catch (UltimaTransformacionAlcanzada e) {
 			System.out.println("Ya se alcanzo la ultima transformacion");
 		}
+	}
+	
+	public void obtenerEfecto(Efecto efecto) {
+		if (efecto.getEfecto() == 1) {
+			this.ganarPuntosDeVida(100);
+		}
+		else {
+			efectos.put(efecto.getEfecto(), efecto);
+		}
+		if (efecto.getEfecto() == 3) {
+			equipo.incrementarEsferasDelDragon();
+		}
+	}
+	
+	public void desactivarEfectos(int turno) {
+		for (Efecto efecto : efectos.values()) {
+			if (!efecto.estaActivo(turno)) {
+				efectos.remove(efecto.getEfecto());
+			}
+		}
+	}
+	
+	public void avanzarTurno(int turno) {
+		desactivarEfectos(turno);
+		ganarKi();
+	}
+	
+	public boolean estaParalizado() {
+		if (efectos.containsKey(4)) {
+			return true;
+		}
+		return false;
 	}
 	
 	@Override

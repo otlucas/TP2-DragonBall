@@ -41,4 +41,10 @@ public class Equipo {
 		}
 		return true;
 	}
+	
+	public void avanzarTurno(int turno) {
+		for (Personaje personaje : integrantes.values()) {
+			personaje.avanzarTurno(turno);
+		}
+	}
 }

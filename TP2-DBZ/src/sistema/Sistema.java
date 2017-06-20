@@ -42,6 +42,14 @@ public class Sistema {
         }
     }
     
+    public void mover(Casillero origen, Casillero destino) throws CasilleroOcupado, MovimientoNoValido {
+		Personaje personaje = (Personaje) origen.getPosicionable();
+		Consumible consumible = (Consumible) destino.getPosicionable();
+		if(consumible !=  null)
+			personaje.obtenerEfecto(consumible.getEfecto(turno.devolverNumeroDeTurno()));
+		tablero.mover(origen, destino);
+	}
+    
     public void finalizarTurno() {
     	int equipo = turno.finalizarTurno();
     	int turnoActual = turno.devolverNumeroDeTurno();

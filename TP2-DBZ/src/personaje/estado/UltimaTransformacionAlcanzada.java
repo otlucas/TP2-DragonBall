@@ -1,6 +1,6 @@
 package personaje.estado;
 
-public class UltimaTransformacionAlcanzada extends Exception {
+public class UltimaTransformacionAlcanzada extends RuntimeException {
 
 	/**
 	 * 

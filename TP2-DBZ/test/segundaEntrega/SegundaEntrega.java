@@ -186,7 +186,7 @@ public class SegundaEntrega {
 	}
 	
 	@Test
-	public void test10VerificarQueElDañoDeGokuAumentaCuandoTieneMuyPocaVidaConAtaqueBasico(){
+	public void test10VerificarQueElDanioDeGokuAumentaCuandoTieneMuyPocaVidaConAtaqueBasico(){
 
 		tablero.posicionar(cell, 0, 0);
 		tablero.posicionar(goku, 0, 1);
@@ -198,7 +198,7 @@ public class SegundaEntrega {
 	}
 	
 	@Test
-	public void test11VerificarQueElDañoDeGokuAumentaCuandoTieneMuyPocaVidaConAtaqueEspecial(){
+	public void test11VerificarQueElDanioDeGokuAumentaCuandoTieneMuyPocaVidaConAtaqueEspecial(){
 
 		tablero.posicionar(cell, 0, 0);
 		tablero.posicionar(goku, 0, 1);

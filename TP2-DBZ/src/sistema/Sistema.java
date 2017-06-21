@@ -1,11 +1,13 @@
 package sistema;
 
+import consumible.EsferaDelDragon;
+import consumible.Nube;
+import consumible.Semilla;
 import personaje.*;
-import tablero.Casillero;
-import tablero.Equipo;
-import tablero.Tablero;
+import tablero.*;
 import turno.Turno;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import consumible.Consumible;

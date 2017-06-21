@@ -20,12 +20,12 @@ public class BotonAtacarHandler implements EventHandler<ActionEvent> {
     public void handle(ActionEvent actionEvent) {
 		Casillero casilleroAtacante = this.contenedor.seleccion.get(0);
 		Casillero casilleroVictima = this.contenedor.seleccion.get(1);
-		try{
-			this.contenedor.sistema.atacar(casilleroAtacante, casilleroVictima, this.ataqueEspecial);
-			this.contenedor.limpiarVentanaDelJuego();
-			this.contenedor.actualizarVentanaDelJuego();
-		}catch(AtaqueNoValido e){
-			//this.contenedor.mostrarMensaje("Ataque no valido");
-		}
+        try {
+            this.contenedor.sistema.atacar(casilleroAtacante, casilleroVictima, this.ataqueEspecial);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        this.contenedor.limpiarVentanaDelJuego();
+        this.contenedor.actualizarVentanaDelJuego();
     }
 }

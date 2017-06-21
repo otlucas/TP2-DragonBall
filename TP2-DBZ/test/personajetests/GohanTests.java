@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import personaje.*;
+import personaje.estado.UltimaTransformacionAlcanzada;
 import tablero.Equipo;
 
 public class GohanTests {
@@ -101,7 +102,7 @@ public class GohanTests {
 	}
 	
 	@Test
-	public void test12EfectuarPrimeraTransformacionCambioPoderDePelea() throws personaje.CondicionesInsuficientes{
+	public void test12EfectuarPrimeraTransformacionCambioPoderDePelea() throws personaje.CondicionesInsuficientes {
 
 		for (int i = 0; i<8; i++)
 			testGohan.ganarKi();

@@ -14,17 +14,59 @@ public class Sistema {
     private List<Personaje> personajes;
     private List<Consumible> consumibles;
     private List<Equipo> equipos;
-    private Tablero tablero;
+    public Tablero tablero;
     private Turno turno;
     private Equipo equipoActual;
 
-
-    public Sistema(List<Personaje> personajes, List<Consumible> consumibles, List<Equipo> equipos, Tablero tablero) {
+    public Sistema() {
+    	Goku goku = new Goku();
+    	Gohan gohan = new Gohan();
+    	Freezer freezer = new Freezer();
+    	Piccolo piccolo = new Piccolo();
+    	Cell cell = new Cell();
+    	MajinBoo majin = new MajinBoo();
+    	
+    	Nube nube = new Nube();
+    	EsferaDelDragon esfera = new EsferaDelDragon();
+    	Semilla semilla = new Semilla();
+    	
+    	Equipo guerreros = new Equipo("Guerreros Z");
+    	Equipo enemigos = new Equipo("Enemigos de la Tierra");
+    	guerreros.agregarPersonaje(goku);
+    	guerreros.agregarPersonaje(gohan);
+    	guerreros.agregarPersonaje(piccolo);
+    	enemigos.agregarPersonaje(majin);
+    	enemigos.agregarPersonaje(cell);
+    	enemigos.agregarPersonaje(freezer);
+    	
+    	List<Consumible> consumibles = new ArrayList<Consumible>();
+    	List<Personaje> personajes = new ArrayList<Personaje>();
+    	List<Equipo> equipos = new ArrayList<Equipo>();
+    	
+    	personajes.add(goku);
+    	personajes.add(gohan);
+    	personajes.add(freezer);
+    	personajes.add(cell);
+    	personajes.add(majin);
+    	personajes.add(piccolo);
+    	consumibles.add(semilla);
+    	consumibles.add(esfera);
+    	consumibles.add(nube);
+    	equipos.add(enemigos);
+    	equipos.add(guerreros);
+    	
         this.personajes = personajes;
         this.consumibles = consumibles;
         this.equipos = equipos;
-        this.tablero = tablero;
+        this.tablero = new Tablero(20);
         this.turno = new Turno();
+        
+        tablero.posicionar(goku, 0, 0);
+        tablero.posicionar(gohan, 0, 1);
+        tablero.posicionar(piccolo, 1, 0);
+        tablero.posicionar(cell, 19, 19);
+        tablero.posicionar(freezer, 19, 18);
+        tablero.posicionar(majin, 18, 19);
     }
 
     public void atacar(Casillero origen, Casillero destino, boolean especial) throws Exception {

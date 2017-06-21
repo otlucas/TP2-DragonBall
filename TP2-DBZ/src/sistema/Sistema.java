@@ -25,11 +25,11 @@ public class Sistema {
     	Piccolo piccolo = new Piccolo();
     	Cell cell = new Cell();
     	MajinBoo majin = new MajinBoo();
-    	
+
     	Nube nube = new Nube();
     	EsferaDelDragon esfera = new EsferaDelDragon();
     	Semilla semilla = new Semilla();
-    	
+
     	Equipo guerreros = new Equipo("Guerreros Z");
     	Equipo enemigos = new Equipo("Enemigos de la Tierra");
     	guerreros.agregarPersonaje(goku);
@@ -38,11 +38,11 @@ public class Sistema {
     	enemigos.agregarPersonaje(majin);
     	enemigos.agregarPersonaje(cell);
     	enemigos.agregarPersonaje(freezer);
-    	
+
     	List<Consumible> consumibles = new ArrayList<Consumible>();
     	List<Personaje> personajes = new ArrayList<Personaje>();
     	List<Equipo> equipos = new ArrayList<Equipo>();
-    	
+
     	personajes.add(goku);
     	personajes.add(gohan);
     	personajes.add(freezer);
@@ -54,7 +54,7 @@ public class Sistema {
     	consumibles.add(nube);
     	equipos.add(enemigos);
     	equipos.add(guerreros);
-    	
+
         this.personajes = personajes;
         this.consumibles = consumibles;
         this.equipos = equipos;
@@ -67,6 +67,10 @@ public class Sistema {
         tablero.posicionar(cell, 19, 19);
         tablero.posicionar(freezer, 19, 18);
         tablero.posicionar(majin, 18, 19);
+    }
+
+    public Tablero getTablero() {
+        return tablero;
     }
 
     public void atacar(Casillero origen, Casillero destino, boolean especial) throws Exception {

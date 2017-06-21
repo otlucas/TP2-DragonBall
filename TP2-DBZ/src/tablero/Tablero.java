@@ -27,6 +27,10 @@ public class Tablero {
 		return false;
 	}
 
+	public Casillero getCasillero(int x, int y) {
+		return this.tablero[x][y];
+	}
+
 /* PARA LUEGO UBICAR CONSUMIBLES*/
 /*	public void posicionarAlAzar(Posicionable posicionable){
 		Random random = new Random();

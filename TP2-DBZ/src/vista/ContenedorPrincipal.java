@@ -67,12 +67,12 @@ public class ContenedorPrincipal extends GridPane {
         		HBox hbBtn = new HBox(5);
         		hbBtn.setAlignment(Pos.CENTER);
         		hbBtn.getChildren().add(btn);
-        		if(this.sistema.getTablero()[x][y - 2].estaOcupado()){
-        			this.setIcono(btn, this.sistema.getTablero()[x][y - 2]);
+        		if(this.sistema.getTablero().getCasillero(x, y - 2).estaOcupado()){
+        			this.setIcono(btn, this.sistema.getTablero().getCasillero(x, y - 2));
         		}
         		this.add(hbBtn, x, y);
-        		botonesCasilleros.put(this.sistema.getTablero()[x][y - 2], btn);
-        		BotonCasilleroHandler btnCasilleroHandler = new BotonCasilleroHandler(this.sistema.getTablero()[x][y - 2], this);
+        		botonesCasilleros.put(this.sistema.getTablero().getCasillero(x, y - 2), btn);
+        		BotonCasilleroHandler btnCasilleroHandler = new BotonCasilleroHandler(this.sistema.getTablero().getCasillero(x, y - 2), this);
         		btn.setOnAction(btnCasilleroHandler);
         	}
         }

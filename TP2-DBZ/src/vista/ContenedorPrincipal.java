@@ -205,7 +205,7 @@ public class ContenedorPrincipal extends GridPane {
 	    	 posEnIconos = 12;
 	     }
 	     else if(((Personaje)(casillero).getPosicionable()).nombre == "MajinBoo"){
-	    	 posEnIconos = 12;
+	    	 posEnIconos = 15;
 	     }
 	     image = this.iconos.get(posEnIconos + ((Personaje)(casillero).getPosicionable()).getNumeroDeTransformacion());
 	     imageView = new ImageView(image);

@@ -157,5 +157,9 @@ public abstract class Personaje implements Posicionable {
 	public int getNumeroDeTransformacion(){
 		return this.numeroDeTransformacion;
 	}
+	
+	public String getNombre() {
+		return nombre;
+	}
 
 }

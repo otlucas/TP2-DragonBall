@@ -1,9 +1,9 @@
 package personaje.estado;
 
-public class UltimaTransformacionAlcanzada extends Exception {
+public class UltimaTransformacionAlcanzada extends RuntimeException {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 

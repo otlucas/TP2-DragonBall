@@ -3,7 +3,6 @@ package vista;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -68,12 +67,12 @@ public class ContenedorPrincipal extends GridPane {
         		HBox hbBtn = new HBox(5);
         		hbBtn.setAlignment(Pos.CENTER);
         		hbBtn.getChildren().add(btn);
-        		if(this.sistema.getTablero().getCasillero(x, y - 2).estaOcupado()){
-        			this.setIcono(btn, this.sistema.getTablero().getCasillero(x, y - 2));
+        		if(this.sistema.getTablero()[x][y - 2].estaOcupado()){
+        			this.setIcono(btn, this.sistema.getTablero()[x][y - 2]);
         		}
         		this.add(hbBtn, x, y);
-        		botonesCasilleros.put(this.sistema.getTablero().getCasillero(x, y - 2), btn);
-        		BotonCasilleroHandler btnCasilleroHandler = new BotonCasilleroHandler(this.sistema.getTablero().getCasillero(x, y - 2), this);
+        		botonesCasilleros.put(this.sistema.getTablero()[x][y - 2], btn);
+        		BotonCasilleroHandler btnCasilleroHandler = new BotonCasilleroHandler(this.sistema.getTablero()[x][y - 2], this);
         		btn.setOnAction(btnCasilleroHandler);
         	}
         }
@@ -205,7 +204,7 @@ public class ContenedorPrincipal extends GridPane {
 	    	 posEnIconos = 12;
 	     }
 	     else if(((Personaje)(casillero).getPosicionable()).nombre == "MajinBoo"){
-	    	 posEnIconos = 15;
+	    	 posEnIconos = 12;
 	     }
 	     image = this.iconos.get(posEnIconos + ((Personaje)(casillero).getPosicionable()).getNumeroDeTransformacion());
 	     imageView = new ImageView(image);

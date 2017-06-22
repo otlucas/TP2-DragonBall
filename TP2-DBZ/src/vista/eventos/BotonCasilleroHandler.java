@@ -4,8 +4,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import personaje.Personaje;
 import tablero.Casillero;
-import tablero.CasilleroOcupado;
-import tablero.MovimientoNoValido;
 import vista.ContenedorPrincipal;
 
 public class BotonCasilleroHandler implements EventHandler<ActionEvent> {
@@ -48,13 +46,7 @@ public class BotonCasilleroHandler implements EventHandler<ActionEvent> {
 					this.contenedor.limpiarVentanaDelJuego();
 				}
 			}else if(this.casillero.estaEnRango(1, this.contenedor.seleccion.get(0))){
-				try {
-					this.contenedor.sistema.mover(this.contenedor.seleccion.get(0), this.casillero);
-				} catch (CasilleroOcupado casilleroOcupado) {
-					casilleroOcupado.printStackTrace();
-				} catch (MovimientoNoValido movimientoNoValido) {
-					movimientoNoValido.printStackTrace();
-				}
+				this.contenedor.sistema.mover(this.contenedor.seleccion.get(0), this.casillero);
 				this.contenedor.actualizarVentanaDelJuego();
 				this.contenedor.limpiarVentanaDelJuego();
 			}

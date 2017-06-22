@@ -5,8 +5,8 @@ import posicionable.Posicionable;
 /*import java.util.Random;*/
 
 public class Tablero {
-	
-	private Casillero[][] tablero;
+
+	public Casillero[][] tablero;
 
 	public Tablero(Integer dimension) {
 		this.tablero = new Casillero[dimension][dimension];
@@ -25,10 +25,6 @@ public class Tablero {
 			return true;
 		}
 		return false;
-	}
-
-	public Casillero getCasillero(int x, int y) {
-		return this.tablero[x][y];
 	}
 
 /* PARA LUEGO UBICAR CONSUMIBLES*/

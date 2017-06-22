@@ -23,7 +23,15 @@ public class Main extends Application {
 
 	@Override
     public void start(Stage primaryStage) {
-        Sistema sistema = new Sistema();
+        primaryStage.setTitle("Dragon Ball FighterZ");
+
+        personajes.add(testCell);//Y esto
+        personajes.add(testGoku);//Y esto
+
+        tablero.posicionar(testGoku, 5, 5);//Y esto
+        tablero.posicionar(testCell, 5, 6);//Y esto
+
+        Sistema sistema = new Sistema(personajes, null, null, tablero);
 
         ContenedorPrincipal contenedor = new ContenedorPrincipal(primaryStage, sistema);
 

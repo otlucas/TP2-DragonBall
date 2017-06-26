@@ -13,7 +13,8 @@ public abstract class Personaje implements Posicionable {
 
 	public String nombre;
 	protected int puntosDeVidaMaximos, puntosDeVida, ki;
-	protected int multiplicadorKi = 1, multiplicadorVelocidad = 1, multiplicadorPoder = 1;
+	protected int multiplicadorKi = 1, multiplicadorVelocidad = 1, 
+	protected double multiplicadorPoder = 1;
 	protected boolean estaParalizado;
 	protected Estado modo;
 	protected ArrayList<Efecto> efectos = new ArrayList<Efecto>();
@@ -123,7 +124,7 @@ public abstract class Personaje implements Posicionable {
 	}
 	
 	public void activarEfectoEsfera(Efecto efecto) {
-		multiplicadorPoder = 2;
+		multiplicadorPoder = 1.25;
 		equipo.incrementarEsferasDelDragon();
 		efectos.add(efecto);
 	}

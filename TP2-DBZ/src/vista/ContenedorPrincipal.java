@@ -245,6 +245,10 @@ public class ContenedorPrincipal extends GridPane {
 		botonesAccion.add(hbBtn1);
 		botonesAccion.add(hbBtn);
 	}
+	
+	public void mostrarMensaje(String mensaje) {
+		
+	}
 
 
 }

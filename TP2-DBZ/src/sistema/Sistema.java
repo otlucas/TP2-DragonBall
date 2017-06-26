@@ -55,6 +55,7 @@ public class Sistema {
         this.equipos = equipos;
         this.tablero = new Tablero(20);
         this.turno = new Turno();
+        this.equipoActual = this.setEquipoInicial(this.turno,this.equipos);
 
         tablero.posicionar(goku, 0, 0);
         tablero.posicionar(gohan, 0, 1);
@@ -67,11 +68,18 @@ public class Sistema {
     public Tablero getTablero() {
         return tablero;
     }
+    
+    public Equipo setEquipoInicial(Turno turno, List<Equipo> equipos){
+    	int a = turno.turnoInicial();
+    	return equipos.get(a-1);
+    }
 
     public void atacar(Casillero origen, Casillero destino, boolean especial) throws AtaqueNoValido {
         if(!origen.estaOcupado() || ! destino.estaOcupado()) throw new AtaqueNoValido();
         Personaje atacante = (Personaje) origen.getPosicionable();
         Personaje victima = (Personaje) destino.getPosicionable();
+        if (atacante.getEquipo()!=equipoActual || victima.getEquipo()==atacante.getEquipo())
+			throw new AtaqueNoValido();
         if(origen.estaEnRango(atacante.getdistanciaDeAtaque(),destino)){
             atacante.atacarA(victima,especial);
             if ((atacante.getNombre() == "MajinBoo") && especial) {
@@ -89,6 +97,8 @@ public class Sistema {
 
     public void mover(Casillero origen, Casillero destino) throws CasilleroOcupado, MovimientoNoValido {
 		Personaje personaje = (Personaje) origen.getPosicionable();
+		if (personaje.getEquipo()!=equipoActual)
+			throw new MovimientoNoValido();
 		Consumible consumible = (Consumible) destino.getPosicionable();
 		if(consumible !=  null) {
 			personaje.obtenerEfecto(consumible.getEfecto(turno.devolverNumeroDeTurno()));
@@ -99,6 +109,13 @@ public class Sistema {
     	//}
 		tablero.mover(origen, destino);
 	}
+    
+    public void transformar(Casillero casillero) throws TransformacionNoValida {
+    	Personaje personaje = (Personaje) casillero.getPosicionable();
+    	if (personaje.getEquipo()!=equipoActual)
+			throw new TransformacionNoValida();
+    	personaje.transformarse();
+    }
 
     public void finalizarTurno() {
     	int equipo = turno.finalizarTurno();

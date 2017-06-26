@@ -1,7 +1,14 @@
 package consumible;
 
+import efecto.Efecto;
+import efecto.EfectoSemilla;
+
 public class Semilla extends Consumible{
 	
-	protected int turno = 1;
 	protected int cantidadDeTurnos = 1;
+	
+	public Efecto getEfecto(int turno) {
+		Efecto efecto = new EfectoSemilla(turno + cantidadDeTurnos);
+		return efecto;
+	}
 }

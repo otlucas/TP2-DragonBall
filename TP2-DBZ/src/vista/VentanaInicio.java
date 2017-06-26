@@ -1,4 +1,4 @@
-package vistas;
+package vista;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -12,6 +12,7 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import vista.eventos.*;
 
 public class VentanaInicio extends VBox {
 

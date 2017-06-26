@@ -3,15 +3,20 @@ package personaje;
 import personaje.estado.*;
 import posicionable.Posicionable;
 import tablero.Equipo;
-import consumible.Efecto;
-import java.util.HashMap;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import efecto.Efecto;
 
 public abstract class Personaje implements Posicionable {
 
 	public String nombre;
 	protected int puntosDeVidaMaximos, puntosDeVida, ki;
+	protected int multiplicadorKi = 1, multiplicadorVelocidad = 1, multiplicadorPoder = 1;
+	protected boolean estaParalizado;
 	protected Estado modo;
-	protected HashMap<Integer, Efecto> efectos = new HashMap<Integer, Efecto>();
+	protected ArrayList<Efecto> efectos = new ArrayList<Efecto>();
 	private Equipo equipo;
 	protected int numeroDeTransformacion;
 
@@ -35,11 +40,7 @@ public abstract class Personaje implements Posicionable {
 
 	/*Devuelve el poder de pelea del personaje.*/
 	public int getPoderDePelea() {
-		double efecto = 1;
-		if (efectos.containsKey(3)) {
-			efecto = 1.25;
-		}
-		return (int) (modo.getPoderDePelea() * efecto);
+		return (int) (modo.getPoderDePelea() * multiplicadorPoder);
 	}
 
 	/*Devuelve la distancia de ataque del personaje.*/
@@ -49,11 +50,7 @@ public abstract class Personaje implements Posicionable {
 
 	/*Devuelve la velocidad de desplazamiento del personaje.*/
 	public int getVelocidadDeDesplazamiento() {
-		int efecto = 1;
-		if (efectos.containsKey(2)) {
-			efecto = 2;
-		}
-		return (modo.getVelocidadDeDesplazamiento() * efecto);
+		return (modo.getVelocidadDeDesplazamiento() * multiplicadorVelocidad);
 	}
 
 	/*Se le asigna un equipo al personaje*/
@@ -86,11 +83,7 @@ public abstract class Personaje implements Posicionable {
 
 	/*Al comienzo de cada turno, todos los personajes ganan 5 puntos de ki.*/
 	public void ganarKi() {
-		int efecto = 1;
-		if (efectos.containsKey(4)) {
-			efecto = 0;
-		}
-		ki = ki + (5 * efecto);
+		ki = ki + (5 * multiplicadorKi);
 	}
 
 	public void atacarA(Personaje victima, boolean especial) {
@@ -113,23 +106,57 @@ public abstract class Personaje implements Posicionable {
 	}
 
 	public void obtenerEfecto(Efecto efecto) {
-		if (efecto.getEfecto() == 1) {
-			this.ganarPuntosDeVida(100);
-		}
-		else {
-			efectos.put(efecto.getEfecto(), efecto);
-		}
-		if (efecto.getEfecto() == 3) {
-			equipo.incrementarEsferasDelDragon();
-		}
+		efecto.activarEfecto(this);
 	}
 
 	public void desactivarEfectos(int turno) {
-		for (Efecto efecto : efectos.values()) {
-			if (!efecto.estaActivo(turno)) {
-				efectos.remove(efecto.getEfecto());
-			}
+		int indice = 0;
+		for (Efecto efecto : efectos) {
+			indice++;
+			efecto.desactivarEfecto(turno, this, indice);
 		}
+	}
+	
+	public void activarEfectoNube(Efecto efecto) {
+		multiplicadorVelocidad = 2;
+		efectos.add(efecto);
+	}
+	
+	public void activarEfectoEsfera(Efecto efecto) {
+		multiplicadorPoder = 2;
+		equipo.incrementarEsferasDelDragon();
+		efectos.add(efecto);
+	}
+	
+	public void activarEfectoChocolate(Efecto efecto) {
+		multiplicadorKi = 0;
+		estaParalizado = true;
+		efectos.add(efecto);
+	}
+	
+	public void activarEfectoSemilla(Efecto efecto) {
+		this.ganarPuntosDeVida(100);
+		efectos.add(efecto);
+	}
+	
+	public void desactivarEfectoNube(int indice) {
+		multiplicadorVelocidad = 1;
+		efectos.remove(indice);
+	}
+	
+	public void desactivarEfectoEsfera(int indice) {
+		multiplicadorPoder = 1;
+		efectos.remove(indice);
+	}
+	
+	public void desactivarEfectoChocolate(int indice) {
+		multiplicadorKi = 1;
+		estaParalizado = false;
+		efectos.remove(indice);
+	}
+	
+	public void desactivarEfectoSemilla(int indice) {
+		efectos.remove(indice);
 	}
 
 	public void avanzarTurno(int turno) {
@@ -138,10 +165,7 @@ public abstract class Personaje implements Posicionable {
 	}
 
 	public boolean estaParalizado() {
-		if (efectos.containsKey(4)) {
-			return true;
-		}
-		return false;
+		return estaParalizado;
 	}
 
 	@Override

@@ -55,10 +55,6 @@ public class Sistema {
         tablero.posicionar(freezer, 19, 18);
         tablero.posicionar(majin, 18, 19);
 
-        tablero.posicionarConsumible();
-        tablero.posicionarConsumible();
-        tablero.posicionarConsumible();
-        tablero.posicionarConsumible();
     }
 
     public Tablero getTablero() {
@@ -105,7 +101,8 @@ public class Sistema {
 		Consumible consumible = (Consumible) destino.getPosicionable();
 		if(consumible !=  null) {
 			personaje.obtenerEfecto(consumible.getEfecto(turno.devolverNumeroDeTurno()));
-			consumibles.remove(0);
+			if(consumibles.size() > 0)
+				consumibles.remove(0);
 		}
     	//if (equipoActual.contarEsferasDelDragon() == 7) {
     		/*Terminar el juego*/

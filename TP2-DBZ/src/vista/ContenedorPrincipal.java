@@ -136,13 +136,13 @@ public class ContenedorPrincipal extends GridPane {
 	public void actualizarVentanaDelJuego(){
 		//Actualiza que casilleros estan ocupados
 		for(Casillero e :this.botonesCasilleros.keySet()){
-			if(e.estaOcupado()){
-				if (!(e.getPosicionable().esMovible()))
+			if(e.getPosicionable() != null){
+				if (!(e.getPosicionable().esMovible())){
 					this.setIconoConsumibles(this.botonesCasilleros.get(e), e);
-				else
+				}else{
 					this.setIcono(this.botonesCasilleros.get(e), e);
+				}
 			}
-
 			else{
 				this.botonesCasilleros.get(e).setGraphic(null);
 			}
@@ -187,11 +187,11 @@ public class ContenedorPrincipal extends GridPane {
 		this.iconos.add(image16);
 		Image image17 = new Image(Main.class.getResource("/vista/imagenes/MajinBoo/MajinBoo_Ultima.png").toExternalForm(), 100, 100, true, true);
 		this.iconos.add(image17);
-		Image image18 = new Image(Main.class.getResource("/vista/imagenes/Goku/gokuNormal.png").toExternalForm(), 100, 100, true, true);
+		Image image18 = new Image(Main.class.getResource("/vista/imagenes/Consumibles/Nube.png").toExternalForm(), 100, 100, true, true);
 		this.iconos.add(image18);
-		Image image19 = new Image(Main.class.getResource("/vista/imagenes/Goku/gokuNormal.png").toExternalForm(), 100, 100, true, true);
+		Image image19 = new Image(Main.class.getResource("/vista/imagenes/Consumibles/Esfera.png").toExternalForm(), 100, 100, true, true);
 		this.iconos.add(image19);
-		Image image20 = new Image(Main.class.getResource("/vista/imagenes/Goku/gokuNormal.png").toExternalForm(), 100, 100, true, true);
+		Image image20 = new Image(Main.class.getResource("/vista/imagenes/Consumibles/Semilla.png").toExternalForm(), 100, 100, true, true);
 		this.iconos.add(image20);
 		return iconos;
 
@@ -232,14 +232,14 @@ public class ContenedorPrincipal extends GridPane {
 		 Image image = null;
 		 ImageView imageView = null;
 		 int posEnIconos = 0;
-	     if(((Consumible)casillero.getPosicionable()).tipo == 1){
-	    	 posEnIconos = 16;
-	     }
-	     else if(((Consumible)casillero.getPosicionable()).tipo == 2){
-	    	 posEnIconos = 17;
-	     }
-	     else if(((Consumible)casillero.getPosicionable()).tipo == 3){
+	     if(((Consumible)casillero.getPosicionable()).getTipo() == 2){
 	    	 posEnIconos = 18;
+	     }
+	     else if(((Consumible)casillero.getPosicionable()).getTipo() == 1){
+	    	 posEnIconos = 19;
+	     }
+	     else if(((Consumible)casillero.getPosicionable()).getTipo() == 3){
+	    	 posEnIconos = 20;
 	     }
 	     image = this.iconos.get(posEnIconos);
 	     imageView = new ImageView(image);

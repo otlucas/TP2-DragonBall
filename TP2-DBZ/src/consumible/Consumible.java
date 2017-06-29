@@ -6,7 +6,6 @@ import posicionable.Posicionable;
 public abstract class Consumible implements Posicionable {
 
 	protected int cantidadDeTurnos;
-	public int tipo;
 
 	public abstract Efecto getEfecto(int turno);
 
@@ -19,4 +18,6 @@ public abstract class Consumible implements Posicionable {
 	public boolean ocupaEspacio() {
 		return false;
 	}
+
+	public abstract int getTipo();
 }

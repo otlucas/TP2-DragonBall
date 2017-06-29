@@ -2,7 +2,6 @@ package vista.eventos;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import personaje.Personaje;
 import tablero.Casillero;
 import tablero.MovimientoNoValido;
 import vista.ContenedorPrincipal;
@@ -20,13 +19,11 @@ public class BotonCasilleroHandler implements EventHandler<ActionEvent> {
     @Override
     public void handle(ActionEvent actionEvent) {
     	int posY;
-		Personaje personaje;
 		if(this.contenedor.seleccion.isEmpty()){
 			posY = 0;
 			this.contenedor.limpiarVentanaDelJuego();
 			if(this.casillero.estaOcupado()){
 				this.contenedor.imprimirInfo(this.casillero, posY, this.contenedor.datosPrimerPersonaje, true);
-				personaje = (Personaje) this.casillero.getPosicionable();
 				this.contenedor.seleccion.add(0, this.casillero);
 				this.contenedor.crearBotonTransformar(this.casillero);
 				}
@@ -35,7 +32,6 @@ public class BotonCasilleroHandler implements EventHandler<ActionEvent> {
 			posY = 6;
 			if(this.casillero.estaOcupado()){
 				this.contenedor.imprimirInfo(this.casillero, posY, this.contenedor.datosSegundoPersonaje, false);
-				personaje = (Personaje) this.casillero.getPosicionable();
 				if(this.casillero != this.contenedor.seleccion.get(0)){//Esto sirve para cancelar la seleccion
 					this.contenedor.seleccion.add(1, this.casillero);
 					this.contenedor.crearBotonAtacar();

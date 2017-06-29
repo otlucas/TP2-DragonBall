@@ -6,7 +6,7 @@ import consumible.*;
 import java.util.Random;
 
 public class Tablero {
-	
+
 	private Casillero[][] tablero;
 
 	public Tablero(Integer dimension) {
@@ -33,8 +33,8 @@ public class Tablero {
 	}
 
 	public Posicionable posicionarConsumible() {
-		Random randomGenY = new Random(System.currentTimeMillis());
-		Random randomGenX = new Random(System.currentTimeMillis());
+		Random randomGenY = new Random();
+		Random randomGenX = new Random();
 		Random consumibleGen = new Random(System.currentTimeMillis());
 		int numeroAleatorio = consumibleGen.nextInt(3) + 1;
 		Posicionable consumible;

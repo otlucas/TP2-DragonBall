@@ -11,4 +11,9 @@ public class Chocolate extends Consumible {
 		Efecto efecto = new EfectoChocolate(turno + cantidadDeTurnos);
 		return efecto;
 	}
+
+	@Override
+	public int getTipo() {
+		return 4;
+	}
 }

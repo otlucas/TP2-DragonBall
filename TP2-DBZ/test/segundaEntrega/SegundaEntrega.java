@@ -6,7 +6,6 @@ import static org.junit.Assert.assertFalse;
 import org.junit.Test;
 
 import personaje.*;
-import personaje.CondicionesInsuficientes;
 import tablero.*;
 
 public class SegundaEntrega {
@@ -122,7 +121,7 @@ public class SegundaEntrega {
 	}
 
 	@Test
-	public void test06CellEfectuaPrimeraTransformacionCorrectamenteDespuesDeAbsorberVida() throws CondicionesInsuficientes {
+	public void test06CellEfectuaPrimeraTransformacionCorrectamenteDespuesDeAbsorberVida() throws CondicionesInsuficientes, KiInsuficiente {
 
 		tablero.posicionar(cell, 0, 0);
 		tablero.posicionar(gohan, 0, 1);
@@ -140,7 +139,7 @@ public class SegundaEntrega {
 	}
 
 	@Test
-	public void test07CellEfectuaSegundaTransformacionCorrectamenteDespuesDeAbsorberVida() throws CondicionesInsuficientes {
+	public void test07CellEfectuaSegundaTransformacionCorrectamenteDespuesDeAbsorberVida() throws CondicionesInsuficientes, KiInsuficiente {
 
 		tablero.posicionar(cell, 0, 0);
 		tablero.posicionar(gohan, 0, 1);
@@ -159,7 +158,7 @@ public class SegundaEntrega {
 	}
 
 	@Test
-	public void test08ComprobarQueAbsorberAumentaLaVidaDeCellSiNoEstaAlMaximoYHaceDanioBasicoAlEnemigo() {
+	public void test08ComprobarQueAbsorberAumentaLaVidaDeCellSiNoEstaAlMaximoYHaceDanioBasicoAlEnemigo() throws KiInsuficiente {
 
 		tablero.posicionar(cell, 0, 0);
 		tablero.posicionar(gohan, 0, 1);
@@ -173,7 +172,7 @@ public class SegundaEntrega {
 	}
 
 	@Test
-	public void test09ComprobarQueAbsorberNoAumentaLaVidaDeCellSiEstaAlMaximoYHaceDanioBasicoAlEnemigo(){
+	public void test09ComprobarQueAbsorberNoAumentaLaVidaDeCellSiEstaAlMaximoYHaceDanioBasicoAlEnemigo() throws KiInsuficiente{
 
 		tablero.posicionar(cell, 0, 0);
 		tablero.posicionar(gohan, 0, 1);

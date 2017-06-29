@@ -11,15 +11,18 @@ public class Freezer extends Personaje {
 		this.puntosDeVida = 400;
 		this.ki = 0;
 		this.numeroDeTransformacion = 0;
+		this.kiParaAtaqueEspecial = 20;
+		this.cantidadDeMovimientos = modo.getVelocidadDeDesplazamiento();
+		this.cantidadDeAtaques = 1;
 	}
 
 	public boolean puedeEfectuarAtaqueEspecial(){
-		return (ki >= 20);
+		return (ki >= kiParaAtaqueEspecial);
 	}
 
 	public int ejecutarAtaqueEspecial(int danio){
 		danio = danio + (int)(0.5*danio);
-		ki = ki - 20;
+		ki = ki - kiParaAtaqueEspecial;
 		return danio;
 	}
 

@@ -11,12 +11,13 @@ public class CellSemiPerfecto extends Estado {
 		this.poderDePelea = 40;
 		this.distanciaDeAtaque = 4;
 		this.velocidadDeDesplazamiento = 3;
+		this.kiParaTransformarse = 0;
 	}
 	public boolean puedeTransformarse(int ki, Equipo equipo) {
 		return (cantidadDeVecesQueAbsorbioVida >= 8);
 	}
 
-	public Estado transformarse(int ki) throws UltimaTransformacionAlcanzada {
+	public Estado transformarse() throws UltimaTransformacionAlcanzada {
 		return new CellPerfecto(cantidadDeVecesQueAbsorbioVida);
 	}
 	
@@ -24,5 +25,4 @@ public class CellSemiPerfecto extends Estado {
 		cantidadDeVecesQueAbsorbioVida++;
 	}
 	
-
 }

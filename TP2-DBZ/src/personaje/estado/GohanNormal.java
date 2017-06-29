@@ -11,14 +11,14 @@ public class GohanNormal extends Estado {
 		this.distanciaDeAtaque = 2;
 		this.velocidadDeDesplazamiento = 2;
 		this.estadoSiguiente = new GohanSuperSayajin1();
+		this.kiParaTransformarse = 10;
 	}
 
 	public boolean puedeTransformarse(int ki, Equipo equipo) {
-		return (ki >= 10);
+		return (ki >= kiParaTransformarse);
 	}
 	
-	public Estado transformarse(int ki) {
-		ki = ki - 10;
+	public Estado transformarse() {
 		return estadoSiguiente;
 	}
 

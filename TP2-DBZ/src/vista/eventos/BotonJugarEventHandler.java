@@ -1,4 +1,4 @@
-package vistas;
+package vista.eventos;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

@@ -8,9 +8,10 @@ public abstract class Estado {
 	protected int distanciaDeAtaque;
 	protected int velocidadDeDesplazamiento;
 	private int cantidadDeVecesQueAbsorbioVida;
+	protected int kiParaTransformarse;
 	
 	public abstract boolean puedeTransformarse(int ki, Equipo equipo);
-	public abstract Estado transformarse(int ki) throws UltimaTransformacionAlcanzada;
+	public abstract Estado transformarse() throws UltimaTransformacionAlcanzada;
 	
 	public int getPoderDePelea() {
 		return poderDePelea;
@@ -28,4 +29,7 @@ public abstract class Estado {
 		cantidadDeVecesQueAbsorbioVida++;
 	}
 	
+	public int getKiParaTransformarse() {
+		return kiParaTransformarse;
+	}
 }

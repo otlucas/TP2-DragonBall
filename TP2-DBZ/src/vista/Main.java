@@ -21,9 +21,13 @@ public class Main extends Application {
         Sistema sistema = new Sistema();
 
         ContenedorPrincipal contenedor = new ContenedorPrincipal(primaryStage, sistema);
+        Scene gameScene = new Scene(contenedor, 3000, 2000);
 
-        Scene scene = new Scene(contenedor, 3000, 2000);
-        primaryStage.setScene(scene);
+        VentanaInicio ventanaInicio = new VentanaInicio(primaryStage, gameScene);
+        Scene startScene = new Scene(ventanaInicio, 3000, 2000);
+
+
+        primaryStage.setScene(startScene);
         primaryStage.setFullScreen(true);
         primaryStage.show();
     }

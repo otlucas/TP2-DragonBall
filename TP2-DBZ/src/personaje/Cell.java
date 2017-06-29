@@ -13,15 +13,18 @@ public class Cell extends Personaje {
 		this.puntosDeVida = 500;
 		this.ki = 0;
 		this.numeroDeTransformacion = 0;
+		this.kiParaAtaqueEspecial = 5;
+		this.cantidadDeMovimientos = modo.getVelocidadDeDesplazamiento();
+		this.cantidadDeAtaques = 1;
 	}
 
 	public boolean puedeEfectuarAtaqueEspecial() {
-		return (ki >= 5);
+		return (ki >= kiParaAtaqueEspecial);
 	}
 
 	public int ejecutarAtaqueEspecial(int danio) {
 		this.ganarPuntosDeVida(danio);
-		ki = ki - 5;
+		ki = ki - kiParaAtaqueEspecial;
 		modo.incrementarCantidadDeVecesQueAbsorbioVida();
 		return danio;
 	}

@@ -11,12 +11,13 @@ public class CellPerfecto extends Estado {
 		this.poderDePelea = 80;
 		this.distanciaDeAtaque = 4;
 		this.velocidadDeDesplazamiento = 4;
+		this.kiParaTransformarse = 0;
 	}
 	public boolean puedeTransformarse(int ki, Equipo equipo) {
 		return false;
 	}
 
-	public Estado transformarse(int ki) throws UltimaTransformacionAlcanzada {
+	public Estado transformarse() throws UltimaTransformacionAlcanzada {
 		throw new UltimaTransformacionAlcanzada();
 	}
 	

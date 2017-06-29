@@ -11,14 +11,14 @@ public class FreezerSegundaForma extends Estado {
 		this.distanciaDeAtaque = 3;
 		this.velocidadDeDesplazamiento = 4;
 		this.estadoSiguiente = new FreezerDefinitivo();
+		this.kiParaTransformarse = 50;
 	}
 
 	public boolean puedeTransformarse(int ki, Equipo equipo) {
-		return (ki >= 50);
+		return (ki >= kiParaTransformarse);
 	}
 
-	public Estado transformarse(int ki) throws UltimaTransformacionAlcanzada {
-		ki = ki - 50;
+	public Estado transformarse() throws UltimaTransformacionAlcanzada {
 		return estadoSiguiente;
 	}
 	

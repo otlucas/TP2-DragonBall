@@ -13,7 +13,6 @@ import consumible.*;
 import consumible.Consumible;
 
 public class Sistema {
-    private List<Personaje> personajes;
     private List<Posicionable> consumibles;
     private List<Equipo> equipos;
     public Tablero tablero;
@@ -38,23 +37,16 @@ public class Sistema {
     	enemigos.agregarPersonaje(freezer);
 
     	List<Posicionable> consumibles = new ArrayList<Posicionable>();
-    	List<Personaje> personajes = new ArrayList<Personaje>();
     	List<Equipo> equipos = new ArrayList<Equipo>();
 
-    	personajes.add(goku);
-    	personajes.add(gohan);
-    	personajes.add(freezer);
-    	personajes.add(cell);
-    	personajes.add(majin);
-    	personajes.add(piccolo);
     	equipos.add(enemigos);
     	equipos.add(guerreros);
 
-        this.personajes = personajes;
         this.consumibles = consumibles;
         this.equipos = equipos;
         this.tablero = new Tablero(20);
         this.turno = new Turno();
+        this.equipoActual = this.setEquipoInicial(this.turno,this.equipos);
 
         tablero.posicionar(goku, 0, 0);
         tablero.posicionar(gohan, 0, 1);
@@ -62,22 +54,41 @@ public class Sistema {
         tablero.posicionar(cell, 19, 19);
         tablero.posicionar(freezer, 19, 18);
         tablero.posicionar(majin, 18, 19);
+
+        tablero.posicionarConsumible();
+        tablero.posicionarConsumible();
+        tablero.posicionarConsumible();
+        tablero.posicionarConsumible();
     }
 
     public Tablero getTablero() {
         return tablero;
     }
 
+    public Equipo setEquipoInicial(Turno turno, List<Equipo> equipos){
+    	int a = turno.turnoInicial();
+    	return equipos.get(a-1);
+    }
+
     public void atacar(Casillero origen, Casillero destino, boolean especial) throws AtaqueNoValido {
         if(!origen.estaOcupado() || ! destino.estaOcupado()) throw new AtaqueNoValido();
         Personaje atacante = (Personaje) origen.getPosicionable();
         Personaje victima = (Personaje) destino.getPosicionable();
+        if ((atacante.getEquipo()!=equipoActual) || (victima.getEquipo()==atacante.getEquipo()) || (atacante.getCantidadDeAtaques() <= 0))
+			throw new AtaqueNoValido();
         if(origen.estaEnRango(atacante.getdistanciaDeAtaque(),destino)){
-            atacante.atacarA(victima,especial);
+        	try{
+        		 atacante.atacarA(victima,especial);
+        	}
+           catch (KiInsuficiente k){
+        	   //No hay suficiente ki
+           }
+
             if ((atacante.getNombre() == "MajinBoo") && especial) {
             	Consumible consumible = new Chocolate();
             	victima.obtenerEfecto(consumible.getEfecto(turno.devolverNumeroDeTurno()));
             }
+            atacante.disminuirCantidadDeAtaques();
             if(victima.estaMuerto()){
                 destino.setPosicionable(null);
                 if(victima.getEquipo().perdio()){
@@ -89,6 +100,8 @@ public class Sistema {
 
     public void mover(Casillero origen, Casillero destino) throws CasilleroOcupado, MovimientoNoValido {
 		Personaje personaje = (Personaje) origen.getPosicionable();
+		if ((personaje.getEquipo()!=equipoActual) || (personaje.getCantidadDeMovimientos() <= 0))
+			throw new MovimientoNoValido();
 		Consumible consumible = (Consumible) destino.getPosicionable();
 		if(consumible !=  null) {
 			personaje.obtenerEfecto(consumible.getEfecto(turno.devolverNumeroDeTurno()));
@@ -97,13 +110,21 @@ public class Sistema {
     	//if (equipoActual.contarEsferasDelDragon() == 7) {
     		/*Terminar el juego*/
     	//}
+		personaje.disminuirCantidadDeMovimientos();
 		tablero.mover(origen, destino);
 	}
 
+    public void transformar(Casillero casillero) throws TransformacionNoValida {
+    	Personaje personaje = (Personaje) casillero.getPosicionable();
+    	if (personaje.getEquipo()!=equipoActual)
+			throw new TransformacionNoValida();
+    	personaje.transformarse();
+    }
+
     public void finalizarTurno() {
-    	int equipo = turno.finalizarTurno();
+    	int turnoSiguiente = turno.finalizarTurno();
+    	equipoActual = equipos.get(turnoSiguiente-1);
     	int turnoActual = turno.devolverNumeroDeTurno();
-    	equipoActual = equipos.get(equipo);
     	equipoActual.avanzarTurno(turnoActual);
     	Random randomGen = new Random(System.currentTimeMillis());
     	int random = randomGen.nextInt();
@@ -111,6 +132,8 @@ public class Sistema {
     		Posicionable consumible = tablero.posicionarConsumible();
     		consumibles.add(consumible);
     	}
+    	equipoActual.renovarMovimientos();
+    	equipoActual.renovarAtaques();
     }
 }
 

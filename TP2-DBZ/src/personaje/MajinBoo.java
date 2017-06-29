@@ -11,16 +11,18 @@ public class MajinBoo extends Personaje {
 		this.puntosDeVida = 300;
 		this.ki = 0;
 		this.numeroDeTransformacion = 0;
+		this.kiParaAtaqueEspecial = 30;
+		this.cantidadDeMovimientos = modo.getVelocidadDeDesplazamiento();
+		this.cantidadDeAtaques = 1;
 	}
 
 	public boolean puedeEfectuarAtaqueEspecial(){
-		return (ki >= 30);
+		return (ki >= kiParaAtaqueEspecial);
 	}
 
 	public int ejecutarAtaqueEspecial(int danio){
 		danio = 0;
-		ki = ki - 30;
-		/*INUTILIZAR ENEMIGO*/
+		ki = ki - kiParaAtaqueEspecial;
 		return danio;
 	}
 

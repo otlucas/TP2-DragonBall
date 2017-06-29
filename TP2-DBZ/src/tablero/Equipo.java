@@ -47,4 +47,19 @@ public class Equipo {
 			personaje.avanzarTurno(turno);
 		}
 	}
+	
+	public void renovarMovimientos(){
+		for (String s: integrantes.keySet()){
+			Personaje p = integrantes.get(s);
+			p.renovarMovimientosMaximos();
+		}
+	}
+	
+	public void renovarAtaques(){
+		for (String s: integrantes.keySet()){
+			Personaje p = integrantes.get(s);
+			p.renovarAtaques();
+		}
+	}
+	
 }

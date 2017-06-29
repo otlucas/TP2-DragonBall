@@ -17,8 +17,10 @@ import javafx.stage.Stage;
 import personaje.Personaje;
 import sistema.Sistema;
 import tablero.Casillero;
+import consumible.*;
 import vista.eventos.BotonAtacarHandler;
 import vista.eventos.BotonCasilleroHandler;
+import vista.eventos.BotonFinalizarTurnoHandler;
 import vista.eventos.BotonTransformarHandler;
 
 public class ContenedorPrincipal extends GridPane {
@@ -57,7 +59,7 @@ public class ContenedorPrincipal extends GridPane {
 
         Text scenetitle2 = new Text("Seleccionados:");
         scenetitle2.setFont(Font.font("Tahoma", FontWeight.NORMAL, 15));
-        this.add(scenetitle2, 25, 0, 2, 1);
+        this.add(scenetitle2, 20, 0, 2, 1);
 
         for(int x = 0; x < 20; x++){
         	for(int y = 2; y < 22; y++){
@@ -76,26 +78,26 @@ public class ContenedorPrincipal extends GridPane {
         		btn.setOnAction(btnCasilleroHandler);
         	}
         }
-        //this.setGridLinesVisible(true);
+        this.crearBotonFinalizarTurno();
 	}
 	public void imprimirInfo(Casillero casillero, Integer posY, ArrayList<Text> datosPersonaje, boolean mostrarMovimientoPosible){
 		//Imprime la info del personaje seleccionado en el lado derecho
 		Personaje personaje = (Personaje) casillero.getPosicionable();
 		Text nombre = new Text(String.format("%s", personaje.nombre));
 		nombre.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-		this.add(nombre, 34, posY, 2, 1);
+		this.add(nombre, 23, posY, 2, 1);
 		datosPersonaje.add(nombre);
-		Text puntosdevida = new Text(String.format("Puntos de vida: %d", personaje.getPuntosDeVida()));
-		this.add(puntosdevida, 34, posY + 1, 2, 1);
+		Text puntosdevida = new Text(String.format("Puntos de vida: %d", personaje.getPuntosDeVida()," / ", personaje.getPuntosDeVidaMaximos()));
+		this.add(puntosdevida, 23, posY + 1, 2, 1);
 		datosPersonaje.add(puntosdevida);
 		Text ki = new Text(String.format("Ki: %d", personaje.getKi()));
-		this.add(ki, 34, posY + 2, 2, 1);
+		this.add(ki, 23, posY + 2, 2, 1);
 		datosPersonaje.add(ki);
 		Text velocidad = new Text(String.format("Velocidad: %d", personaje.getVelocidadDeDesplazamiento()));
-		this.add(velocidad, 34, posY + 3, 2, 1);
+		this.add(velocidad, 23, posY + 3, 2, 1);
 		datosPersonaje.add(velocidad);
 		Text poderDePelea = new Text(String.format("Poder de pelea: %d", personaje.getPoderDePelea()));
-		this.add(poderDePelea, 34, posY + 4, 2, 1);
+		this.add(poderDePelea, 23, posY + 4, 2, 1);
 		datosPersonaje.add(poderDePelea);
 		if(mostrarMovimientoPosible){
 			for(Casillero e :botonesCasilleros.keySet()){
@@ -128,14 +130,20 @@ public class ContenedorPrincipal extends GridPane {
 			this.getChildren().remove(e);
 		}
 		this.seleccion.clear();
+		this.crearBotonFinalizarTurno();
 	}
 
 	public void actualizarVentanaDelJuego(){
 		//Actualiza que casilleros estan ocupados
 		for(Casillero e :this.botonesCasilleros.keySet()){
 			if(e.estaOcupado()){
-				this.setIcono(this.botonesCasilleros.get(e), e);
-			}else{
+				if (!(e.getPosicionable().esMovible()))
+					this.setIconoConsumibles(this.botonesCasilleros.get(e), e);
+				else
+					this.setIcono(this.botonesCasilleros.get(e), e);
+			}
+
+			else{
 				this.botonesCasilleros.get(e).setGraphic(null);
 			}
 		}
@@ -179,6 +187,12 @@ public class ContenedorPrincipal extends GridPane {
 		this.iconos.add(image16);
 		Image image17 = new Image(Main.class.getResource("/vista/imagenes/MajinBoo/MajinBoo_Ultima.png").toExternalForm(), 100, 100, true, true);
 		this.iconos.add(image17);
+		Image image18 = new Image(Main.class.getResource("/vista/imagenes/Goku/gokuNormal.png").toExternalForm(), 100, 100, true, true);
+		this.iconos.add(image18);
+		Image image19 = new Image(Main.class.getResource("/vista/imagenes/Goku/gokuNormal.png").toExternalForm(), 100, 100, true, true);
+		this.iconos.add(image19);
+		Image image20 = new Image(Main.class.getResource("/vista/imagenes/Goku/gokuNormal.png").toExternalForm(), 100, 100, true, true);
+		this.iconos.add(image20);
 		return iconos;
 
 	}
@@ -213,13 +227,34 @@ public class ContenedorPrincipal extends GridPane {
 	     btn.setGraphic(imageView);
 	}
 
+	private void setIconoConsumibles(Button btn, Casillero casillero){
+		//Selecciona la imagen del consumible correspondiente y la coloca en el boton como fondo
+		 Image image = null;
+		 ImageView imageView = null;
+		 int posEnIconos = 0;
+	     if(((Consumible)casillero.getPosicionable()).tipo == 1){
+	    	 posEnIconos = 16;
+	     }
+	     else if(((Consumible)casillero.getPosicionable()).tipo == 2){
+	    	 posEnIconos = 17;
+	     }
+	     else if(((Consumible)casillero.getPosicionable()).tipo == 3){
+	    	 posEnIconos = 18;
+	     }
+	     image = this.iconos.get(posEnIconos);
+	     imageView = new ImageView(image);
+	     imageView.setFitWidth(30);
+	 	 imageView.setFitHeight(30);
+	     btn.setGraphic(imageView);
+	}
+
 	public void crearBotonTransformar(Casillero casillero){
 		Button btn = new Button("Transformar");
 		btn.setPrefWidth(100);
 		HBox hbBtn = new HBox(5);
 		hbBtn.setAlignment(Pos.CENTER_LEFT);
 		hbBtn.getChildren().add(btn);
-		this.add(hbBtn, 36, 14, 7, 1);
+		this.add(hbBtn, 23, 14, 1, 1);
 		BotonTransformarHandler btnTransformarHandler = new BotonTransformarHandler(casillero, this);
 		btn.setOnAction(btnTransformarHandler);
 		botonesAccion.add(hbBtn);
@@ -231,13 +266,13 @@ public class ContenedorPrincipal extends GridPane {
 		HBox hbBtn = new HBox(100);
 		hbBtn.setAlignment(Pos.CENTER_LEFT);
 		hbBtn.getChildren().add(btn);
-		this.add(hbBtn, 36, 17, 200, 1);
+		this.add(hbBtn, 23, 17, 3, 1);
 		Button btn1 = new Button("Atacar con ataque especial");
 		btn1.setPrefWidth(200);
 		HBox hbBtn1 = new HBox(100);
 		hbBtn1.setAlignment(Pos.CENTER_LEFT);
 		hbBtn1.getChildren().add(btn1);
-		this.add(hbBtn1, 36, 19, 200, 1);
+		this.add(hbBtn1, 23, 19, 3, 1);
 		BotonAtacarHandler btnAtacarEspecialHandler = new BotonAtacarHandler(this, true);
 		BotonAtacarHandler btnAtacarBasicoHandler = new BotonAtacarHandler(this, false);
 		btn1.setOnAction(btnAtacarEspecialHandler);
@@ -246,5 +281,16 @@ public class ContenedorPrincipal extends GridPane {
 		botonesAccion.add(hbBtn);
 	}
 
+	public void crearBotonFinalizarTurno(){
+		Button btn = new Button("Finalizar Turno");
+		btn.setPrefWidth(200);
+		HBox hbBtn = new HBox(5);
+		hbBtn.setAlignment(Pos.CENTER);
+		hbBtn.getChildren().add(btn);
+		this.add(hbBtn, 21, 21, 2, 1);
+		BotonFinalizarTurnoHandler btnFinalizarTurnoHandler = new BotonFinalizarTurnoHandler(this);
+		btn.setOnAction(btnFinalizarTurnoHandler);
+		botonesAccion.add(hbBtn);
+	}
 
 }

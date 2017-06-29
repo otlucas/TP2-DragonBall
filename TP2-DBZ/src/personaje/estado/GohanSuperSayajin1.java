@@ -11,6 +11,7 @@ public class GohanSuperSayajin1 extends Estado {
 		this.distanciaDeAtaque = 2;
 		this.velocidadDeDesplazamiento = 2;
 		this.estadoSiguiente = new GohanSuperSayajin2();
+		this.kiParaTransformarse = 30;
 	}
 	
 	public boolean puedeTransformarse(int ki, Equipo equipo) {
@@ -18,11 +19,10 @@ public class GohanSuperSayajin1 extends Estado {
 		int puntosDeVidaActualDeGoku = equipo.getIntegrantes().get("Goku").getPuntosDeVida();
 		int puntosDeVidaMaximosDePiccolo = equipo.getIntegrantes().get("Piccolo").getPuntosDeVidaMaximos();
 		int puntosDeVidaActualDePiccolo = equipo.getIntegrantes().get("Piccolo").getPuntosDeVida();
-		return ((ki >= 30) && (puntosDeVidaActualDeGoku < 0.3*puntosDeVidaMaximosDeGoku) && (puntosDeVidaActualDePiccolo < 0.3*puntosDeVidaMaximosDePiccolo));
+		return ((ki >= kiParaTransformarse) && (puntosDeVidaActualDeGoku < 0.3*puntosDeVidaMaximosDeGoku) && (puntosDeVidaActualDePiccolo < 0.3*puntosDeVidaMaximosDePiccolo));
 	}
 	
-	public Estado transformarse(int ki) {
-		ki = ki - 30;
+	public Estado transformarse() {
 		return estadoSiguiente;
 	}
 	

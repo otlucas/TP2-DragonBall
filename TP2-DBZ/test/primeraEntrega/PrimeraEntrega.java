@@ -88,7 +88,7 @@ public class PrimeraEntrega {
         Tablero tablero = new Tablero(8);
         
         Sistema sistema = new Sistema(personajes, null, null, tablero);
-        
+
         tablero.posicionar(testGoku, 0, 0);
         tablero.posicionar(testCell, 0, 1);
 
